@@ -1,10 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    hola
-</body>
-</html>
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extrastyles %}
+
+    <style>
+        .card-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        @supports (object-fit: cover) {
+            .card-image img {
+                height: 100%;
+                min-height: 16rem;
+                object-fit: cover;
+                object-position: center center;
+            }
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+
+
+    <div class="cd-section" id="headers">
+
+        <!--     Slider Section    -->
+        {% include 'home/components/slider_section.html' %}
+        <!--     End Banner Section    -->
+
+{#        <!--     Who we are Section    -->#}
+{#        {% include 'home/components/who_we_are_section.html' %}#}
+{#        <!--     End Who we are Section    -->#}
+
+        <div class="separator-line separator-primary"></div>
+
+{#        <!--     Events Section    -->#}
+{#        {% include 'home/components/indicator_section.html' %}#}
+{#        <!--     End Indicators Section    -->#}
+{##}
+{#        <!--     Articles Section    -->#}
+{#        {% include 'home/components/pulse_section.html' %}#}
+{#        <!--     End Pulse Section    -->#}
+{##}
+{#        <!--     Articles Section    -->#}
+{#        {% include 'home/components/flash_section.html' %}#}
+{#        <!--     End Flash Section    -->#}
+
+        <div class="separator-line separator-primary"></div>
+
+{#        <!--     Contact us Section    -->#}
+{#        {% include 'home/../assets/contact_us_section.html' %}#}
+{#        <!--     End Contact us Section    -->#}
+
+    </div>
+
+
+
+
+
+{% endblock %}
+{% block extrajs %}
+{#    <script>#}
+{#        $(document).ready(function () {#}
+{#            $("#alert_success").hide();#}
+{#            $("#alert_danger").hide();#}
+{#            $("time.timeago").timeago();#}
+{##}
+{#            $('form').on('submit', function (e) {#}
+{#                e.preventDefault();#}
+{#                let parameters = $(this).serializeArray();#}
+{#                console.log(parameters);#}
+{#                $.ajax({#}
+{#                    url: '',#}
+{#                    type: 'POST',#}
+{#                    data: parameters,#}
+{#                    dataType: 'json'#}
+{#                }).done(function (data) {#}
+{#                    //si no hay error#}
+{#                    if (!data.hasOwnProperty('error')) {#}
+{#                        $("#alert_success").text(data['exito']);#}
+{#                        $("#alert_success").fadeTo(2000, 500).slideUp(500, function () {#}
+{#                            $("#alert_success").slideUp(500);#}
+{#                        });#}
+{#                        $('form')[0].reset();#}
+{#                        return false;#}
+{#                    }#}
+{#                }).fail(function (jqXHR, textStatus, errorThrown) {#}
+{#                    $("#alert_success").text(textStatus + ': ' + errorThrown);#}
+{#                    $("#alert_danger").fadeTo(2000, 500).slideUp(500, function () {#}
+{#                        $("#alert_danger").slideUp(500);#}
+{#                    });#}
+{#                }).always(function (data) {#}
+{##}
+{#                })#}
+{#            })#}
+{#        });#}
+{#    </script>#}
+
+{% endblock %}
