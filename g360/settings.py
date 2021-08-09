@@ -138,3 +138,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+SENDGRID_SANDBOX_MODE_IN_DEBUG = True
