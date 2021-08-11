@@ -4,6 +4,9 @@ from django.shortcuts import render, redirect
 
 
 # Create your views here.
+from authentication.models import Staff
+
+
 def renderLogin(request):
     if request.user.is_authenticated:
         return redirect('intranet')
@@ -55,6 +58,10 @@ def renderRegister(request):
                                                 password=password, email=email)
                 group = Group.objects.get(name="Member")
                 group.user_set.add(user)
+
+                staff = Staff()
+                staff.user = user
+                staff.save()
 
                 user = authenticate(request, username=email, password=password)
                 if user is not None:
