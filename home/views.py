@@ -9,6 +9,7 @@ from django.template.loader import get_template
 def renderHome(request):
     context = {
         'title_page' : 'Home',
+        'is_active_home': 'active',
     }
     return render(request, 'home/home.html', context)
 
