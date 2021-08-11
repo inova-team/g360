@@ -47,3 +47,11 @@ def renderContactUs_email(request):
             data['error'] = str(e)
 
         return JsonResponse(data)
+
+#@login_required(login_url='')
+def renderIntranet(request):
+    context = {
+        'title_page': 'Intranet',
+        'is_active_intranet': 'active'
+    }
+    return render(request, 'intranet/intranet.html', context)
