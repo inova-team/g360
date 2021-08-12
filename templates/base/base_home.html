@@ -31,16 +31,16 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
     <!--     Fonts and icons     -->
-    {% include '/base/stylesheet.html' %}
+    {% include 'base/stylesheet.html' %}
     {% block extrastyles %}{% endblock %}
     {% block extrahead %}{% endblock %}
 </head>
 <body>
-{% include '/home/components/navbar.html' %}
+{% include 'home/components/navbar.html' %}
 {% block body %}{% endblock %}
-{% include '/base/footer.html' %}
+{% include 'base/footer.html' %}
 </body>
 
-{% include '/base/js.html' %}
+{% include 'base/js.html' %}
 {% block extrajs %}{% endblock %}
 </html>
