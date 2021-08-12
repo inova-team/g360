@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('authentication/', include('authentication.urls')),
     #path('dictionary/', include('dictionary.urls')),
+    path('sponsor/', include('sponsor.urls')),
 ]
 
 if settings.DEBUG:
