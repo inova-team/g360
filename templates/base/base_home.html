@@ -36,13 +36,7 @@
     {% block extrahead %}{% endblock %}
 </head>
 <body>
-
-{% if title_page == "Home" %}
-    {% include '/home/components/navbar.html' %}
-{% else %}
-    {% include '/base/navbar.html' %}
-{% endif %}
-
+{% include '/home/components/navbar.html' %}
 {% block body %}{% endblock %}
 {% include '/base/footer.html' %}
 </body>
