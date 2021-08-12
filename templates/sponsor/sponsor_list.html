@@ -28,6 +28,7 @@
                         <th class="disabled-sorting text-center">Banner</th>
                         <th class="text-center">Nombre</th>
                         <th class="text-center">Descripción</th>
+                        <th class="text-center">Rubro</th>
                         <th class="text-center">Autor</th>
                         <th class="disabled-sorting text-center">Acciones</th>
                     </tr>
@@ -37,6 +38,7 @@
                         <th class="disabled-sorting text-center">Banner</th>
                         <th class="text-center">Nombre</th>
                         <th class="text-center">Descripción</th>
+                        <th class="text-center">Rubro</th>
                         <th class="text-center">Autor</th>
                         <th class="disabled-sorting text-center">Acciones</th>
                     </tr>
@@ -54,12 +56,13 @@
                             </td>
                             <td>{{ sponsor.name|truncatechars:"100" }}</td>
                             <td>{{ sponsor.description|truncatechars:"200" }}</td>
+                            <td>{{ sponsor.type|truncatechars:"200" }}</td>
                             <td>{{ sponsor.author }}</td>
                             <td class="text-center">
 {#                                <a href="{{ article.pdf.url }}"#}
 {#                                   class="btn btn-round btn-info btn-icon btn-sm download_pdf_link" target="_blank"><i#}
 {#                                        class="fas fa-download"></i></a>#}
-                                <a href="#"
+                                <a href="{% url 'sponsor_update' sponsor.pk %}"
                                    class="btn btn-round btn-success btn-icon btn-sm edit"><i
                                         class="far fa-edit"></i></a>
                                 <a href="#" class="btn btn-round btn-danger btn-icon btn-sm"
