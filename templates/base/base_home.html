@@ -31,22 +31,22 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
     <!--     Fonts and icons     -->
-    {% include '/assets_home/base/stylesheet.html' %}
+    {% include '/assets_landing/base/stylesheet.html' %}
     {% block extrastyles %}{% endblock %}
     {% block extrahead %}{% endblock %}
 </head>
 <body>
 
 {% if title_page == "Home" %}
-    {% include '/assets_home/home/components/navbar.html' %}
+    {% include '/assets_landing/home/components/navbar.html' %}
 {% else %}
-    {% include '/assets_home/base/navbar.html' %}
+    {% include '/assets_landing/base/navbar.html' %}
 {% endif %}
 
 {% block body %}{% endblock %}
-{% include '/assets_home/base/footer.html' %}
+{% include '/assets_landing/base/footer.html' %}
 </body>
 
-{% include '/assets_home/base/js.html' %}
+{% include '/assets_landing/base/js.html' %}
 {% block extrajs %}{% endblock %}
 </html>
