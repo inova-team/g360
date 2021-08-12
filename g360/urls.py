@@ -25,6 +25,7 @@ urlpatterns = [
     path('dictionary/', include('dictionary.urls')),
     path('sponsor/', include('sponsor.urls')),
     path('alliance/', include('alliance.urls')),
+    path('article/', include('article.urls')),
 ]
 
 if settings.DEBUG:

@@ -82,13 +82,13 @@
             {% endif %}
             <ul class="nav">
                 <li class="{{ is_active_article_upload }}">
-                    <a href="">
+                    <a href="{% url 'article_upload' %}">
                         <span class="sidebar-mini-icon">C</span>
                         <span class="sidebar-normal"> Crear </span>
                     </a>
                 </li>
                 <li class="{{ is_active_article_list }}">
-                    <a href="">
+                    <a href="{% url 'article_upload' %}">
                         <span class="sidebar-mini-icon">L</span>
                         <span class="sidebar-normal"> Listar </span>
                     </a>
