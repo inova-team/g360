@@ -13,6 +13,11 @@ def word_upload(request):
         current_userpk = request.user.pk
         user = User.objects.get(pk=current_userpk)
         word.register_author = user
+
+        if request.POST.get('category_select') != "0":
+            category_select = Word_Category.objects.get(pk=request.POST.get('category_select'))
+            word.category = category_select
+
         word.word = request.POST.get('word')
         word.definition = request.POST.get('definition')
         word.save()
@@ -48,10 +53,9 @@ def word_update(request, pk):
     users = User.objects.all()
     categories = Word_Category.objects.all()
     if request.POST:
-
-        if request.POST.get('author_select') != "0":
-            author_select = User.objects.get(pk=request.POST.get('author_select'))
-            word.register_author = author_select
+        current_userpk = request.user.pk
+        user = User.objects.get(pk=current_userpk)
+        word.register_author = user
 
         if request.POST.get('category_select') != "0":
             category_select = Word_Category.objects.get(pk=request.POST.get('category_select'))
@@ -76,10 +80,9 @@ def category_upload(request):
     categories = Word_Category.objects.all()
     if request.POST:
         category = Word_Category()
-        # current_user = request.user
-        # category.register_author = current_user
-        user = User.objects.get(pk=2)  # el primer usuario
-        category.register_author = user
+        current_user = request.user
+        category.register_author = current_user
+
         category.name = request.POST.get('category_name')
         category.description = request.POST.get('description')
         category.banner = request.FILES.get('image_uploads')
@@ -117,10 +120,9 @@ def category_update(request, pk):
     category = Word_Category.objects.get(pk=pk)
     categories = Word_Category.objects.all()
     if request.POST:
-        # current_user = request.user
-        # category.update_author = current_user
-        user = User.objects.get(pk=2)  # el primer usuario
-        category.register_author = user
+        current_user = request.user
+        category.update_author = current_user
+
         category.name = request.POST.get('category_name')
         category.description = request.POST.get('description')
 

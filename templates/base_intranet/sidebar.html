@@ -5,7 +5,7 @@
   -->
     <div class="logo">
         <a href="{% url 'home' %}" class="simple-text logo-mini">
-            <img src="{% static '/img/g360/banner_g360.png'%}">
+            <img src="{% static '/img/g360/banner_g360.png' %}">
         </a>
         <a href="#" class="simple-text logo-normal">
             G360°
@@ -101,7 +101,7 @@
                     <a data-toggle="collapse" href="#category">
                         <i class="now-ui-icons education_atom"></i>
                         <p>
-                            Categorías <b class="caret"></b>
+                            Categorías-Gestipedia <b class="caret"></b>
                         </p>
                     </a>
                     <div class="collapse show" id="category">
@@ -110,7 +110,7 @@
                 <a data-toggle="collapse" href="#category">
                     <i class="now-ui-icons education_atom"></i>
                     <p>
-                        Categorías <b class="caret"></b>
+                        Categorías-Gestipedia <b class="caret"></b>
                     </p>
                 </a>
                 <div class="collapse " id="category">
@@ -120,34 +120,34 @@
                 <li class="{{ is_active_category_upload }}">
                     <a href="{% url 'category_create' %}">
                         <span class="sidebar-mini-icon">C</span>
-                        <span class="sidebar-normal"> Crear </span>
+                        <span class="sidebar-normal"> Crear Categoria</span>
                     </a>
                 </li>
                 <li class="{{ is_active_category_list }}">
                     <a href="{% url 'category_list' %}">
                         <span class="sidebar-mini-icon">L</span>
-                        <span class="sidebar-normal"> Listar </span>
+                        <span class="sidebar-normal"> Listar Categorias</span>
                     </a>
                 </li>
             </ul>
 
 
 
-             {% if is_active_word_upload == 'active' or is_active_word_list == 'active' %}
+            {% if is_active_word_upload == 'active' or is_active_word_list == 'active' %}
                 <li class="active">
                     <a data-toggle="collapse" href="#word">
                         <i class="now-ui-icons education_atom"></i>
                         <p>
-                            Palabras <b class="caret"></b>
+                            Palabras-Gestipedia <b class="caret"></b>
                         </p>
                     </a>
                     <div class="collapse show" id="word">
-                        {% else %}
+            {% else %}
                 <li>
                 <a data-toggle="collapse" href="#word">
                     <i class="now-ui-icons education_atom"></i>
                     <p>
-                        Palabras <b class="caret"></b>
+                        Palabras-Gestipedia <b class="caret"></b>
                     </p>
                 </a>
                 <div class="collapse " id="word">
@@ -157,19 +157,18 @@
                 <li class="{{ is_active_word_upload }}">
                     <a href="{% url 'word_upload' %}">
                         <span class="sidebar-mini-icon">C</span>
-                        <span class="sidebar-normal"> Crear </span>
+                        <span class="sidebar-normal"> Crear Palabra </span>
                     </a>
                 </li>
                 <li class="{{ is_active_word_list }}">
                     <a href="{% url 'word_list' %}">
                         <span class="sidebar-mini-icon">L</span>
-                        <span class="sidebar-normal"> Listar </span>
+                        <span class="sidebar-normal"> Listar palabras </span>
                     </a>
                 </li>
 
             </ul>
-            </div>
-            </li>
+
             {#            <li>#}
             {#                <a data-toggle="collapse" href="#formsExamples">#}
             {#                    <i class="now-ui-icons files_single-copy-04"></i>#}

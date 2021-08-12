@@ -1,10 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_intranet/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block extrastyles %}
+    <style>
+
+        {#form {margin: 50px;padding: 20px;}#}
+
+        div > img {
+            background: #eee;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            list-style-type: none;
+            border: 1px solid black;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+    </style>
+{% endblock %}
+
+{% block panel-header %}
+    <div class="header text-center">
+        <h2 class="title">{{ title_page }}</h2>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+
+                    <hr>
+                    <form name="word_upload_form" id="word_upload_form" method="post"
+                          enctype="multipart/form-data" onsubmit="return validateWordUploadForm();">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Palabra*</label>
+                            <input type="text" name="word" id="word" class="form-control"
+                                   value="{{ word.word }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Definición*</label>
+                            <textarea class="form-control" name="definition" id="definition" rows="6"
+                                      >{{ word.definition }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Categoría*</label>
+                            <select id="category_select" name="category_select" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                                <option value="0">---------</option>
+                                {% for categorie in categories %}
+                                    {% if categorie.pk == article.category.pk %}
+                                        <option value="{{ categorie.pk }}" selected>{{ categorie.name }}</option>
+                                    {% else %}
+                                        <option value="{{ categorie.pk }}" >{{ categorie.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="formulario__mensaje" id="formulario__mensaje">
+                            <p id="message_upload_error" style="display:none;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <b>Error:</b>
+                                Por favor rellena el formulario correctamente.
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="reset" class="btn btn-danger" onclick="cancelWordUpload()">Cancelar
+                            </button>
+                            &nbsp;
+                            <button type="submit" class="btn btn-success">Guardar</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block extrajs %}
+    <script>
+        const p_error = document.getElementById('message_upload_error');
+
+        function validateWordUploadForm() {
+
+            let correct = false;
+
+            let word = document.forms["article_upload_form"]["name"].value;
+            let definition = document.forms["article_upload_form"]["description"].value;
+            let category = document.forms["article_upload_form"]["category_select"].value;
+
+            if (word.trim().length != 0 && definition.trim().length != 0 && category != 0) {
+                correct = true;
+                p_error.style.display = "none";
+            } else {
+                correct = false;
+                p_error.style.display = "block";
+            }
+            return correct;
+        }
+
+        function cancelWordUpload() {
+            window.location.href = "{% url 'word_list' %}"
+
+        }
+
+    </script>
+{% endblock %}

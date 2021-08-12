@@ -50,34 +50,6 @@
                             <label for="description">Descripción*</label>
                             <textarea type="text" name="description" id="description" class="form-control">{{ category.description }}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Responsable*</label>
-                            <select id="responsable_select" name="responsable_select" class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option value="0">---------</option>
-                                {% for user in users %}
-                                    {% if user.pk == category.responsable.pk %}
-                                        <option value="{{ user.pk }}" selected>{{ user }}</option>
-                                    {% else %}
-                                        <option value="{{ user.pk }}" >{{ user }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Categoria Padre (Opcional)</label>
-                            <select id="category_select" name="category_select" class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option value="0">---------</option>
-                                {% for categorie in categories %}
-                                    {% if categorie.pk != category.pk %}
-                                        {% if categorie.pk == category.category_father.pk %}
-                                            <option value="{{ categorie.pk }}" selected>{{ categorie.name }}</option>
-                                        {% else %}
-                                            <option value="{{ categorie.pk }}" >{{ categorie.name }}</option>
-                                        {% endif %}
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </div>
                         <div>
                             <label class="btn btn-github btn-round" for="image_uploads">Elija una imagen
                                 <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png">
