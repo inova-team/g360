@@ -1,0 +1,106 @@
+{% extends 'base_intranet/base.html' %}
+{% load static %}
+
+{% block extrastyles %}
+    <style>
+
+    </style>
+{% endblock %}
+
+{% block panel-header %}
+    <div class="header text-center">
+        <h2 class="title">{{ title_page }}</h2>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    {#    <h2>Categorías</h2>#}
+    <p>
+        <a href="{% url 'category_create' %}" class="btn btn-primary">Crear Categoría</a>
+    </p>
+    <div class="card card-plain">
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table id="datatable" class="table table-striped table-bordered table-sm" width="100%">
+                    <thead class="thead-light">
+                    <tr>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Descripción</th>
+                        <th class="disabled-sorting text-center">Imagen</th>
+                        <th class="text-center">Autor</th>
+                        <th class="disabled-sorting text-center">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Descripción</th>
+                        <th class="disabled-sorting text-center">Imagen</th>
+                        <th class="text-center">Autor</th>
+                        <th class="disabled-sorting text-center">Acciones</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{ category.name|truncatechars:"100" }}</td>
+                            <td>{{ category.description|truncatechars:"200" }}</td>
+                            <td class="text-center">
+                                {% if category.banner %}
+                                    <img src="{{ category.banner.url }}" alt="{{ category.name }}" width="80"
+                                         height="80">
+                                {% else %}
+                                    <span class="text-muted">Sin imagen</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ category.register_author.first_name }} {{ category.register_author.last_name }}</td>
+                            <td class="text-center">
+                                <a href="{% url 'category_update' category.pk %}"
+                                   class="btn btn-round btn-success btn-icon btn-sm edit"><i
+                                        class="far fa-edit"></i></a>
+                                <a href="#" class="btn btn-round btn-danger btn-icon btn-sm remove"
+                                   data-toggle="modal"
+                                   data-target="#confirmationDeleteModal{{ category.pk }}"><i
+                                        class="fas fa-trash"></i></a>
+                            </td>
+                            <!-- Modal -->
+                            <div class="modal fade" id="confirmationDeleteModal{{ category.pk }}" tabindex="-1"
+                                 role="dialog"
+                                 aria-labelledby="confirmationDeleteModal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Eliminar Categoría</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h5 class="modal-body" id="exampleModalLabelBody">Estás seguro de realizar
+                                                esta acción?</h5>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                Cancelar
+                                            </button>
+                                            <a href="{% url 'category_delete' category.pk %}"
+                                               class="btn btn-danger btn-sm">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrajs %}
+
+{% endblock %}

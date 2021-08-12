@@ -1,0 +1,207 @@
+{% extends 'base_intranet/base.html' %}
+{% load static %}
+
+{% block extrastyles %}
+    <style>
+
+        {#form {margin: 50px;padding: 20px;}#}
+
+        div > img {
+            background: #eee;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            list-style-type: none;
+            border: 1px solid black;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+    </style>
+{% endblock %}
+
+{% block panel-header %}
+    <div class="header text-center">
+        <h2 class="title">{{ title_page }}</h2>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+{#                    <h2>Modificar Categoría</h2>#}
+                    <hr>
+                    <form name="category_update_form" id="category_update_form" method="post"
+                          action="{% url 'category_update' category.pk %}" enctype="multipart/form-data"
+                          onsubmit="return validateCategoryUpdateForm();">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="category_name">Nombre*</label>
+                            <input type="text" name="category_name" id="category_name" class="form-control" value="{{ category.name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción*</label>
+                            <textarea type="text" name="description" id="description" class="form-control">{{ category.description }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Responsable*</label>
+                            <select id="responsable_select" name="responsable_select" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                                <option value="0">---------</option>
+                                {% for user in users %}
+                                    {% if user.pk == category.responsable.pk %}
+                                        <option value="{{ user.pk }}" selected>{{ user }}</option>
+                                    {% else %}
+                                        <option value="{{ user.pk }}" >{{ user }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Categoria Padre (Opcional)</label>
+                            <select id="category_select" name="category_select" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                                <option value="0">---------</option>
+                                {% for categorie in categories %}
+                                    {% if categorie.pk != category.pk %}
+                                        {% if categorie.pk == category.category_father.pk %}
+                                            <option value="{{ categorie.pk }}" selected>{{ categorie.name }}</option>
+                                        {% else %}
+                                            <option value="{{ categorie.pk }}" >{{ categorie.name }}</option>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="btn btn-github btn-round" for="image_uploads">Elija una imagen
+                                <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png">
+                                <i class="now-ui-icons arrows-1_cloud-upload-94"></i>
+                            </label>
+                            {% if category.banner %}
+                                <img class="rounded" id="banner" name="banner" src="{{ category.banner.url }}"
+                                     alt="banner" width="250" height="250">
+                            {% else %}
+                                <img class="rounded" id="banner" name="banner" src="" alt="banner" width="250"
+                                     height="250"
+                                     style="display:none;">
+                            {% endif %}
+                            <p id="message_error" style="display:none;"></p>
+                        </div>
+
+                        <div class="formulario_mensaje" id="formulario_mensaje">
+                            <p id="message_upload_error" style="display:none;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <b>Error:</b>
+                                Por favor rellena el formulario correctamente.
+                            </p>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="reset" class="btn btn-danger" onclick="cancelCategoryUpdate()">Cancelar
+                            </button>
+                            &nbsp;
+                            <button type="submit" class="btn btn-success">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block extrajs %}
+    <script>
+        const inputImage = document.getElementById('image_uploads');
+        const p_error = document.getElementById('message_upload_error');
+
+        inputImage.addEventListener('change', updateImageDisplay);
+
+        function updateImageDisplay() {
+            let image = document.getElementById('banner');
+            let para = document.getElementById('message_error');
+            const curFiles = inputImage.files;
+            if (curFiles && curFiles.length > 0) {
+                const file = curFiles[0];
+                if (validFileType(file)) {
+                    image.src = URL.createObjectURL(file);
+                    image.style.display = "block";
+                    para.style.display = "none";
+                } else {
+                    para.textContent = `No es un tipo de archivo válido, por favor seleccionar nuevamente`;
+                    para.style.display = "block";
+                    image.style.display = "none";
+                }
+            }
+        }
+
+        const fileTypesImage = [
+            'image/apng',
+            'image/bmp',
+            'image/gif',
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+            'image/svg+xml',
+            'image/tiff',
+            'image/webp',
+            `image/x-icon`
+        ];
+
+        function validFileType(file) {
+            return fileTypesImage.includes(file.type);
+        }
+
+        function validFileTypeImage() {
+            let correct = false;
+            let curFiles = inputImage.files;
+            if (curFiles && curFiles.length > 0) {
+                let file = curFiles[0];
+                if (fileTypesImage.includes(file.type)) {
+                    correct = true;
+                }
+            }
+            return correct;
+        }
+
+        function validateCategoryUpdateForm() {
+
+            let correct = false;
+            let imagesOk = true;
+
+            let name = document.forms["category_update_form"]["category_name"].value;
+            let description = document.forms["category_update_form"]["description"].value;
+            let responsable = document.forms["category_update_form"]["responsable_select"].value;
+
+
+            let curFiles = inputImage.files;
+            if (curFiles && curFiles.length > 0) {
+                let file = curFiles[0];
+                if (fileTypesImage.includes(file.type)) {
+                    imagesOk = true;
+                }else{
+                    imagesOk = false;
+                }
+            }
+
+            if (name.trim().length != 0 && description.trim().length != 0 && responsable != 0 && imagesOk) {
+                correct = true;
+                p_error.style.display = "none";
+            } else {
+                correct = false;
+                p_error.style.display = "block";
+            }
+            return correct;
+        }
+
+        function cancelCategoryUpdate() {
+            window.location.href = "{% url 'category_list' %}"
+        }
+
+    </script>
+{% endblock %}

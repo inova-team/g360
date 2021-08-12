@@ -1,0 +1,106 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extrastyles %}
+    <style>
+        .card-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        @supports (object-fit: cover) {
+            .card-image img {
+                height: 100%;
+                min-height: 13rem;
+                object-fit: cover;
+                object-position: center center;
+            }
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        {% if category.banner %}
+            <div class="page-header page-header-small">
+                <div class="page-header-image" data-parallax="true"
+                     style="background-image: url('{{ category.banner.url }}');">
+                </div>
+                <div class="content-center">
+                    <div class="row">
+                        <div class="col-md-8 ml-auto mr-auto text-center">
+                            <h2 class="title">{{ category.name }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="content-center">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2 class="title">{{ category.name }}</h2>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <p class="blockquote blockquote-primary">
+                            {{ category.description }}
+                            <br>
+                            <br>
+                            <small>
+                                {{ category.responsable }}
+                            </small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--     *********     BLOGS 3      *********      -->
+        <div class="blogs-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 ml-auto mr-auto">
+                        {% for article in articles %}
+                            <div class="card card-plain card-blog">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card-image d-flex align-items-stretch">
+                                            {% if article.banner %}
+                                                <img class="img img-raised rounded" src="{{ article.banner.url }}"
+                                                     alt="{{ article.name }}">
+                                            {% else %}
+                                                <span class="text-muted">No banner</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h3 class="card-title">
+                                            <a href="{% url 'article_detail' article.pk %}">{{ article.name|truncatechars:"40" }}</a>
+                                        </h3>
+                                        <p class="card-description">
+                                            {{ article.description|truncatechars:"180" }}
+                                            <a href="{% url 'article_detail' article.pk %}"> Read More </a>
+                                        </p>
+                                        <div class="author">
+                                            <span>{{ article.author }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extrajs %}
+
+{% endblock %}
