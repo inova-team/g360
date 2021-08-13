@@ -61,6 +61,9 @@
                     <p>Intranet</p>
                 </a>
             </li>
+
+
+
             {% if is_active_article_upload == 'active' or is_active_article_list == 'active' %}
                 <li class="active">
                     <a data-toggle="collapse" href="#articles">
@@ -96,33 +99,37 @@
             </ul>
 
 
-            {% if is_active_article_upload == 'active' or is_active_article_list == 'active' %}
+
+
+
+
+            {% if is_active_category_article_upload == 'active' or is_active_category_article_list == 'active' %}
                 <li class="active">
-                    <a data-toggle="collapse" href="#articles">
+                    <a data-toggle="collapse" href="#category_articles">
                         <i class="now-ui-icons design_image"></i>
                         <p>
                             Categorías - Artículos <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse show" id="articles">
+                    <div class="collapse show" id="category_articles">
                         {% else %}
                 <li>
-                <a data-toggle="collapse" href="#articles">
+                <a data-toggle="collapse" href="#category_articles">
                     <i class="now-ui-icons design_image"></i>
                     <p>
                         Categorías - Artículos <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse" id="categories">
+                <div class="collapse" id="category_articles">
             {% endif %}
             <ul class="nav">
-                <li class="{{ is_active_article_upload }}">
+                <li class="{{ is_active_category_article_upload }}">
                     <a href="{% url 'category_article_upload' %}">
                         <span class="sidebar-mini-icon">C</span>
                         <span class="sidebar-normal"> Crear </span>
                     </a>
                 </li>
-                <li class="{{ is_active_article_list }}">
+                <li class="{{ is_active_category_article_list }}">
                     <a href="{% url 'category_article_list' %}">
                         <span class="sidebar-mini-icon">L</span>
                         <span class="sidebar-normal"> Listar </span>
