@@ -103,8 +103,18 @@ def event_list(request):
     return render(request, 'event/event_list.html', context)
 
 
+def event_repository(request):
+    events = Event.objects.all()
+    context = {
+        'events': events
+    }
+    return render(request,'event/event_repository.html',context)
+
+
 @login_required(login_url='g360Login')
 def event_detail(request, pk):
+    event = Event.objects.get(pk=pk)
     context = {
+        'event': event
     }
     return render(request, 'event/event_detail.html', context)

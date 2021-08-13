@@ -20,6 +20,8 @@
         }
 
     </style>
+
+
 {% endblock %}
 
 {% block panel-header %}
@@ -51,6 +53,9 @@
                             <label for="exampleFormControlTextarea1">Descripción*</label>
                             <textarea class="form-control" name="description" id="description" rows="6"
                                       placeholder="Descripción del evento" required></textarea>
+{#                            <div class="min-vh-50">#}
+{#                                <textarea>Next, use our Get Started docs to setup Tiny!</textarea>#}
+{#                            </div>#}
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Responsable*</label>
@@ -111,7 +116,6 @@
 
         </div>
     </div>
-
 
 {% endblock %}
 {% block extrajs %}
@@ -192,4 +196,6 @@
         }
 
     </script>
+
+    <script src="{% static 'assets_intranet/lib/tinymce/tinymce.min.js' %}"></script>
 {% endblock %}
