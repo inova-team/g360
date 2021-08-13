@@ -45,9 +45,21 @@
                     <tbody>
                     {% for word in words %}
                         <tr>
-                            <td>{{ word.word|truncatechars:"100" }}</td>
-                            <td>{{ word.definition|truncatechars:"200" }}</td>
-                            <td>{{ word.category.name}}</td>
+                            <td>{{ word.word }}
+                                <a tabindex="0" class="btn btn-primary btn-link" role="button" data-toggle="popover"
+                                   data-trigger="focus" title="{{ word.word }}"
+                                   data-content="{{ word.definition}}">
+                                   {{ word.word }}
+                                </a>
+                            </td>
+                            <td>{{ word.definition|truncatechars:"100" }}
+                                <a tabindex="0" class="btn btn-primary btn-link" role="button" data-toggle="popover"
+                                   data-trigger="focus" title="Leer"
+                                   data-content="{{ word.definition}}">
+                                   Leer
+                                </a>
+                            </td>
+                            <td>{{ word.category.name }}</td>
                             <td>{{ word.register_author.first_name }} {{ word.register_author.last_name }}</td>
                             <td class="text-center">
                                 <a href="{% url 'word_update' word.pk %}"
@@ -94,6 +106,13 @@
     </div>
 {% endblock %}
 
+
 {% block extrajs %}
 
+
+    <script>
+        $('.popover-dismiss').popover({
+            trigger: 'focus'
+        })
+    </script>
 {% endblock %}
