@@ -27,6 +27,7 @@ urlpatterns = [
     path('alliance/', include('alliance.urls')),
     path('article/', include('article.urls')),
     path('category_article/', include('category_article.urls')),
+    path('event/', include('event.urls')),
 ]
 
 if settings.DEBUG:

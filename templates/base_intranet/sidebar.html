@@ -54,14 +54,51 @@
                 </div>
             </div>
         </div>
+
         <ul class="nav">
             <li class="{{ is_active_intranet }}">
                 <a href="">
                     <i class="now-ui-icons design_app"></i>
-                    <p>Intranet</p>
+                    <p>Inicio</p>
                 </a>
             </li>
 
+            {% if is_active_event_upload == 'active' or is_active_event_list == 'active' %}
+                <li class="active">
+                    <a data-toggle="collapse" href="#events">
+                        <i class="now-ui-icons design_image"></i>
+                        <p>
+                            Eventos <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse show" id="events">
+                        {% else %}
+                <li>
+                <a data-toggle="collapse" href="#events">
+                    <i class="now-ui-icons design_image"></i>
+                    <p>
+                        Eventos <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="events">
+            {% endif %}
+
+            <ul class="nav">
+                <li class="{{ is_active_event_upload }}">
+                    <a href="{% url 'event_upload' %}">
+                        <span class="sidebar-mini-icon">C</span>
+                        <span class="sidebar-normal"> Crear </span>
+                    </a>
+                </li>
+                <li class="{{ is_active_event_list   }}">
+                    <a href="{% url 'event_list' %}">
+                        <span class="sidebar-mini-icon">L</span>
+                        <span class="sidebar-normal"> Listar </span>
+                    </a>
+                </li>
+            </ul>
+            </div>
+            </li>
 
 
             {% if is_active_article_upload == 'active' or is_active_article_list == 'active' %}
@@ -97,11 +134,8 @@
                     </a>
                 </li>
             </ul>
-
-
-
-
-
+            </div>
+            </li>
 
             {% if is_active_category_article_upload == 'active' or is_active_category_article_list == 'active' %}
                 <li class="active">
@@ -138,6 +172,7 @@
             </ul>
             </div>
             </li>
+
             {% if is_active_category_upload == 'active' or is_active_category_list == 'active' %}
                 <li class="active">
                     <a data-toggle="collapse" href="#category">
@@ -172,6 +207,8 @@
                     </a>
                 </li>
             </ul>
+            </div>
+            </li>
 
 
 

@@ -29,5 +29,5 @@ class Event(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.date_register = timezone.now()
-            self.date_last_update= timezone.now()
+        self.date_last_update= timezone.now()
         return super().save(*args, **kwargs)
