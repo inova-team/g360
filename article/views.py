@@ -15,6 +15,7 @@ def article_upload(request):
             article.author = author_select
 
         article.name = request.POST.get('name')
+        article.category = request.POST.get('category')
         article.description = request.POST.get('description')
         article.banner = request.FILES.get('image_uploads')
         article.pdf = request.FILES.get('pdf_uploads')

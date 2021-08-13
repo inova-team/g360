@@ -94,6 +94,41 @@
                     </a>
                 </li>
             </ul>
+
+
+            {% if is_active_article_upload == 'active' or is_active_article_list == 'active' %}
+                <li class="active">
+                    <a data-toggle="collapse" href="#articles">
+                        <i class="now-ui-icons design_image"></i>
+                        <p>
+                            Categorías - Artículos <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse show" id="articles">
+                        {% else %}
+                <li>
+                <a data-toggle="collapse" href="#articles">
+                    <i class="now-ui-icons design_image"></i>
+                    <p>
+                        Categorías - Artículos <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="categories">
+            {% endif %}
+            <ul class="nav">
+                <li class="{{ is_active_article_upload }}">
+                    <a href="{% url 'category_article_upload' %}">
+                        <span class="sidebar-mini-icon">C</span>
+                        <span class="sidebar-normal"> Crear </span>
+                    </a>
+                </li>
+                <li class="{{ is_active_article_list }}">
+                    <a href="{% url 'category_article_list' %}">
+                        <span class="sidebar-mini-icon">L</span>
+                        <span class="sidebar-normal"> Listar </span>
+                    </a>
+                </li>
+            </ul>
             </div>
             </li>
             {% if is_active_category_upload == 'active' or is_active_category_list == 'active' %}

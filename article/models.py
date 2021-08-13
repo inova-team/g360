@@ -6,6 +6,7 @@ from authentication.models import User
 
 class Article(models.Model):
     name = models.CharField(max_length=1000)
+    category = models.CharField(max_length=1000, null=True, blank=True)
     description = models.TextField(max_length=5000)
     author = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     publication_date = models.DateTimeField(editable=False, null=True)

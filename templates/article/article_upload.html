@@ -63,12 +63,9 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Categoría*</label>
-                            <select id="category_select" name="category_select" class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option value="0">---------</option>
-                                {% for categorie in categories %}
-                                    <option value="{{ categorie.pk }}">{{ categorie.name }}</option>
-                                {% endfor %}
-                            </select>
+                            <input type="text" name="categoria" id="category" class="form-control"
+                                   placeholder="Categoría del artículo"
+                            />
                         </div>
                         <div>
                             <label class="btn btn-github btn-round" for="image_uploads">Elija una imagen*
