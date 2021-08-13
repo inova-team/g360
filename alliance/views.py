@@ -5,9 +5,11 @@ from authentication.models import User
 from alliance.models import Alliance
 
 def alliance_list_user(request):
+    media_path = '/media/'
     alliances = Alliance.objects.all()
     context = {
         'alliances': alliances,
+        'media_path':media_path,
         'title_page': 'Alianzas',
         'is_active_alliances': 'active'
     }
