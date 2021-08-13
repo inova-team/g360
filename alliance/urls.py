@@ -4,6 +4,7 @@ from django.urls import path
 from alliance import views
 
 urlpatterns = [
+    path('<int:pk>/', views.alliance_detail_user, name='alliance_detail_user'),
     path('', views.alliance_list_user, name='alliance_list_user'),
     path('alliance_list/', views.alliance_list, name='alliance_list'),
     path('alliance_upload/', views.alliance_upload, name="alliance_upload"),

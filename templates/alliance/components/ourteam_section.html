@@ -1,86 +1,50 @@
 {% load static %}
 
 <div class="about-team team-4">
-
-
     <div class="container">
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-md-8 ml-auto mr-auto text-center">
                 <h2 class="title">Nuestras alianzas</h2>
                 <h4 class="description">Aca iria una descripcion sobre esta seccion...etc</h4>
             </div>
         </div>
-        <div class="row">
-
-            <div class="cards">
-                <div class="container">
-                    {#                <div class="title">#}
-                    {#                    <h3>#}
-                    {#                        <small>Aliados</small>#}
-                    {#                    </h3>#}
-                    {#                </div>#}
-                    <div class="row d-flex justify-content-center">
-                        {% for alliance in alliances %}
-                            <div class="col-md-6 col-lg-3">
-                                <div class="card card-profile">
-                                    <div class="card-image">
-                                        <img class="img rounded"
-                                             src="{{ media_path }}{{ alliance.banner }}">
-                                    </div>
-                                    <div class="card-body">
-                                        <a href="#">
-                                            <h4 class="card-title">{{ alliance.name }}</h4>
-                                        </a>
-                                        {#                                        <h6 class="card-category text-info">#}
-                                        {#                                            {{ alliance.type }}#}
-                                        {#                                        </h6>#}
-
+    <div class="row">
+            <div class="col-md-10 ml-auto mr-auto">
+                <div class="row d-flex justify-content-center">
+                    {% for alliance in alliances %}
+                        <div class="col-md-4 d-flex align-items-stretch">
+                            <div class="card card-blog">
+                                <div class="card-image">
+                                    <a href="{% url 'alliance_detail_user' alliance.pk %}">
+                                        {% if alliance.banner %}
+                                            <img class="img rounded" src="{{ media_path }}{{ alliance.banner }}"
+                                                 alt="{{ alliance.name }}">
+                                        {% else %}
+                                            <span class="text-muted">Sin imagen</span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="card-body">
+{#                                    <h6 class="category text-primary">Features</h6>#}
+                                    <a href="{% url 'alliance_detail_user' alliance.pk %}">
+                                        <h5 class="card-title">
+                                            {{ alliance.name|truncatechars:"100" }}
+                                        </h5>
+                                    </a>
                                         <p class="card-description">
-                                            {{ alliance.description }}
+                                            {{ alliance.description|truncatechars:"100" }}
                                         </p>
-
-                                        <div class="card-footer">
-                                            {#                                            <a href="#pablo" class="btn btn-icon btn-neutral btn-lg btn-twitter"><i#}
-                                            {#                                                    class="fab fa-twitter"></i></a>#}
-                                            {#                                            <a href="#pablo" class="btn btn-icon btn-neutral btn-lg btn-dribbble"><i#}
-                                            {#                                                    class="fab fa-dribbble"></i></a>#}
-                                            {#                                            <a href="#pablo" class="btn btn-icon btn-neutral btn-lg btn-instagram"><i#}
-                                            {#                                                    class="fab fa-instagram"></i></a>#}
-                                        </div>
+                                    <div class="card-footer">
+{#                                        <div class="author">#}
+{#                                            <span>{{ subcategory.responsable }}</span>#}
+{#                                        </div>#}
                                     </div>
                                 </div>
                             </div>
-
-                        {% endfor %}
-
-                        {#              <div class="col-md-6 col-lg-3">#}
-                        {#                <div class="card card-profile">#}
-                        {#                  <div class="card-avatar">#}
-                        {#                    <a href="#pablo">#}
-                        {#                      <img class="img img-raised" src="assets/img/mike.jpg">#}
-                        {#                    </a>#}
-                        {#                  </div>#}
-                        {#                  <div class="card-body">#}
-                        {#                    <h4 class="card-title">Alec Mike</h4>#}
-                        {#                    <h6 class="category text-gray">#}
-                        {#                      Designer#}
-                        {#                    </h6>#}
-                        {#                    <p class="card-description">#}
-                        {#                      One of the co-founders. Alec drives the technical strategy of the platform, customer support and brand.#}
-                        {#                    </p>#}
-                        {#                    <div class="card-footer">#}
-                        {#                      <a href="#pablo" class="btn btn-icon btn-twitter btn-round"><i class="fab fa-twitter"></i></a>#}
-                        {#                      <a href="#pablo" class="btn btn-icon btn-facebook btn-round"><i class="fab fa-facebook-square"></i></a>#}
-                        {#                      <a href="#pablo" class="btn btn-icon btn-google btn-round"><i class="fab fa-google"></i></a>#}
-                        {#                    </div>#}
-                        {#                  </div>#}
-                        {#                </div>#}
-                        {#              </div>#}
-
-                    </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -4,6 +4,20 @@ from django.shortcuts import render, redirect
 from authentication.models import User
 from alliance.models import Alliance
 
+def alliance_detail_user(request, pk):
+    alliance = Alliance.objects.filter(pk=pk).exists()
+    if alliance:
+        alliance = Alliance.objects.get(pk=pk)
+        context = {
+            'alliance': alliance,
+            'is_active_alliances': 'active',
+            'title_page': alliance.name,
+        }
+        return render(request, "alliance/alliance_detail_user.html", context)
+    else:
+        return redirect('home')
+
+
 def alliance_list_user(request):
     media_path = '/media/'
     alliances = Alliance.objects.all()
