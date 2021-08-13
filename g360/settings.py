@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'dictionary',
     'alliance',
     'sponsor',
-    'tinymce',
+    # 'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -147,21 +147,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-TINYMCE_JS_URL = os.path.join(STATIC_URL, "path/to/tiny_mce/tiny_mce.js")
-TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "path/to/tiny_mce")
-TINYMCE_DEFAULT_CONFIG = {
-        "theme": "silver",
-        "height": 500,
-        "menubar": False,
-        "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,"
-                   "searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,paste,"
-                   "code,help,wordcount",
-        "toolbar": "undo redo | formatselect | "
-                   "bold italic backcolor | alignleft aligncenter "
-                   "alignright alignjustify | bullist numlist outdent indent | "
-                   "removeformat | help",
-    }
-TINYMCE_COMPRESSOR = False
+# TINYMCE_JS_URL = os.path.join(STATIC_URL, "path/to/tiny_mce/tiny_mce.js")
+# TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "path/to/tiny_mce")
+# TINYMCE_DEFAULT_CONFIG = {
+#         "theme": "silver",
+#         "height": 500,
+#         "menubar": False,
+#         "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,"
+#                    "searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,paste,"
+#                    "code,help,wordcount",
+#         "toolbar": "undo redo | formatselect | "
+#                    "bold italic backcolor | alignleft aligncenter "
+#                    "alignright alignjustify | bullist numlist outdent indent | "
+#                    "removeformat | help",
+#     }
+# TINYMCE_COMPRESSOR = False
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
