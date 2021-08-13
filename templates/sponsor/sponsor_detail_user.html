@@ -1,0 +1,124 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extrastyles %}
+    <style>
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="cd-section" id="headers">
+
+        <div class="page-header page-header-small">
+            <div class="page-header-image" data-parallax="true"
+                 style="background-image:url({{ sponsor.banner.url }});">
+            </div>
+            <div class="content-center">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <h1 class="title">{{ sponsor.name }}</h1>
+                        <h4>Patrocinador</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+        <div class="row">
+            <div class="col-md-5 ml-auto mr-auto d-flex">
+                <div class="align-self-center">
+                    <h3 class="title">{{ sponsor.description}}</h3>
+                <p class="description">{{ sponsor.description }}
+                    <br>
+                    <br>
+                </p>
+                </div>
+
+
+            </div>
+            <div class="col-md-5 ml-auto mr-auto">
+                <div class="info info-horizontal mt-5">
+                    <div class="icon icon-primary" style="color: #3b5998">
+                        <i class="now-ui-icons location_pin"></i>
+                    </div>
+                    <div class="description">
+                        <h4 class="info-title">Sitio Web</h4>
+                    </div>
+                    <div class="icon icon-primary" style="color: #3b5998">
+                        <i class="now-ui-icons tech_mobile"></i>
+                    </div>
+                    <div class="description">
+                        <h4 class="info-title">Redes Sociales</h4>
+                        <p> Michael Jordan
+                            <br> +40 762 321 762
+                            <br> Mon - Fri, 8:00-22:00
+                        </p>
+                    </div>
+{#                    <div class="icon icon-primary" style="color: #3b5998">#}
+{#                        <i class="business_briefcase-24 now-ui-icons"></i>#}
+{#                    </div>#}
+{#                    <div class="description">#}
+{#                        <h4 class="info-title">Legal Information</h4>#}
+{#                        <p> Creative Tim Ltd.#}
+{#                            <br> VAT · EN2341241#}
+{#                            <br> IBAN · EN8732ENGB2300099123#}
+{#                            <br> Bank · Great Britain Bank#}
+{#                        </p>#}
+{#                    </div>#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <div class="separator-line separator-primary"></div>
+
+        <div class="separator-line separator-primary"></div>
+
+        <!--     Contact us Section    -->
+        {% include 'sponsor/../assets/contact_us_section.html' %}
+        <!--     End Contact us Section    -->
+
+    </div>
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+
+        $(document).ready(function () {
+            $("#alert_success").hide();
+            $("#alert_danger").hide();
+            $("time.timeago").timeago();
+
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+                let parameters = $(this).serializeArray();
+                console.log(parameters);
+                $.ajax({
+                    url: '{% url 'contact_us' %}',
+                    type: 'POST',
+                    data: parameters,
+                    dataType: 'json'
+                }).done(function (data) {
+                    //si no hay error
+                    if (!data.hasOwnProperty('error')) {
+                        $("#alert_success").text(data['exito']);
+                        $("#alert_success").fadeTo(2000, 500).slideUp(500, function () {
+                            $("#alert_success").slideUp(500);
+                        });
+                        $('form')[0].reset();
+                        return false;
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    $("#alert_success").text(textStatus + ': ' + errorThrown);
+                    $("#alert_danger").fadeTo(2000, 500).slideUp(500, function () {
+                        $("#alert_danger").slideUp(500);
+                    });
+                }).always(function (data) {
+
+                })
+            })
+        });
+    </script>
+{% endblock %}

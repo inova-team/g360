@@ -4,6 +4,7 @@ from django.urls import path
 from sponsor import views
 
 urlpatterns = [
+    path('<int:pk>/', views.sponsor_detail_user, name='sponsor_detail_user'),
     path('', views.sponsor_list_user, name='sponsor_list_user'),
     path('sponsor_list', views.sponsor_list, name='sponsor_list'),
     path('sponsor_upload/', views.sponsor_upload, name="sponsor_upload"),

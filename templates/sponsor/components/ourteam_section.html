@@ -2,7 +2,7 @@
 
 <div class="about-team team-4">
     <div class="container">
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-md-8 ml-auto mr-auto text-center">
                 <h2 class="title">Nuestros patrocinadores</h2>
                 <h4 class="description">This is the paragraph where you can write more details about your team. Keep you
@@ -10,75 +10,43 @@
             </div>
         </div>
         <div class="row">
-
-            <div class="cards">
-                <div class="container">
-                    {#                <div class="title">#}
-                    {#                    <h3>#}
-                    {#                        <small>Aliados</small>#}
-                    {#                    </h3>#}
-                    {#                </div>#}
-                    <div class="row  d-flex justify-content-center">
-                        {% for sponsor in sponsors %}
-                            <div class="col-md-6 col-lg-3">
-                                <div class="card card-profile">
-                                    <div class="card-image">
-                                        <img class="img rounded"
-                                             src="{{ media_path }}{{ sponsor.banner }}">
-                                    </div>
-                                    <div class="card-body">
-                                        <a href="#">
-                                            <h4 class="card-title">{{ sponsor.name }}</h4>
-                                        </a>
-                                        {#                                        <h6 class="card-category text-info">#}
-                                        {#                                            {{ sponsor.type }}#}
-                                        {#                                        </h6>#}
-                                        <p class="card-description">
-                                            {{ sponsor.description }}
-                                        </p>
-
-                                        <div class="card-footer">
-                                            {#                                            <a href="#pablo" class="btn btn-icon btn-neutral btn-lg btn-twitter"><i#}
-                                            {#                                                    class="fab fa-twitter"></i></a>#}
-                                            {#                                            <a href="#pablo" class="btn btn-icon btn-neutral btn-lg btn-dribbble"><i#}
-                                            {#                                                    class="fab fa-dribbble"></i></a>#}
-                                            {#                                            <a href="#pablo" class="btn btn-icon btn-neutral btn-lg btn-instagram"><i#}
-                                            {#                                                    class="fab fa-instagram"></i></a>#}
-                                        </div>
+            <div class="col-md-10 ml-auto mr-auto">
+                <div class="row d-flex justify-content-center">
+                    {% for sponsor in sponsors %}
+                        <div class="col-md-4 d-flex align-items-stretch">
+                            <div class="card card-blog">
+                                <div class="card-image">
+                                    <a href="{% url 'sponsor_detail_user' sponsor.pk %}">
+                                        {% if sponsor.banner %}
+                                            <img class="img rounded" src="{{ media_path }}{{ sponsor.banner }}"
+                                                 alt="{{ sponsor.name }}">
+                                        {% else %}
+                                            <span class="text-muted">Sin imagen</span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="card-body">
+{#                                    <h6 class="category text-primary">Features</h6>#}
+                                    <a href="{% url 'sponsor_detail_user' sponsor.pk %}">
+                                        <h5 class="card-title">
+                                            {{ sponsor.name|truncatechars:"100" }}
+                                        </h5>
+                                    </a>
+                                    <p class="card-description">
+                                        {{ sponsor.description|truncatechars:"100" }}
+                                    </p>
+                                    <div class="card-footer">
+                                        {#                                        <div class="author">#}
+                                        {#                                            <span>{{ sponsor.responsable }}</span>#}
+                                        {#                                        </div>#}
                                     </div>
                                 </div>
                             </div>
-
-                        {% endfor %}
-
-                        {#              <div class="col-md-6 col-lg-3">#}
-                        {#                <div class="card card-profile">#}
-                        {#                  <div class="card-avatar">#}
-                        {#                    <a href="#pablo">#}
-                        {#                      <img class="img img-raised" src="assets/img/mike.jpg">#}
-                        {#                    </a>#}
-                        {#                  </div>#}
-                        {#                  <div class="card-body">#}
-                        {#                    <h4 class="card-title">Alec Mike</h4>#}
-                        {#                    <h6 class="category text-gray">#}
-                        {#                      Designer#}
-                        {#                    </h6>#}
-                        {#                    <p class="card-description">#}
-                        {#                      One of the co-founders. Alec drives the technical strategy of the platform, customer support and brand.#}
-                        {#                    </p>#}
-                        {#                    <div class="card-footer">#}
-                        {#                      <a href="#pablo" class="btn btn-icon btn-twitter btn-round"><i class="fab fa-twitter"></i></a>#}
-                        {#                      <a href="#pablo" class="btn btn-icon btn-facebook btn-round"><i class="fab fa-facebook-square"></i></a>#}
-                        {#                      <a href="#pablo" class="btn btn-icon btn-google btn-round"><i class="fab fa-google"></i></a>#}
-                        {#                    </div>#}
-                        {#                  </div>#}
-                        {#                </div>#}
-                        {#              </div>#}
-
-                    </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-
         </div>
     </div>
+</div>
 </div>

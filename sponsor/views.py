@@ -4,6 +4,21 @@ from django.shortcuts import render, redirect
 from authentication.models import User
 from sponsor.models import Sponsor
 
+
+def sponsor_detail_user(request, pk):
+    sponsor = Sponsor.objects.filter(pk=pk).exists()
+    if sponsor:
+        sponsor = Sponsor.objects.get(pk=pk)
+        context = {
+            'sponsor': sponsor,
+            'is_active_sponsors': 'active',
+            'title_page': sponsor.name,
+        }
+        return render(request, "sponsor/sponsor_detail_user.html", context)
+    else:
+        return redirect('home')
+
+
 def sponsor_list_user(request):
     media_path = '/media/'
     sponsors = Sponsor.objects.all()
