@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from authentication.models import Staff
 from event.models import Event
+from django.utils import timezone
 
 
 @login_required(login_url='g360Login')
@@ -21,6 +22,7 @@ def event_upload(request):
         if data_from_html['responsible_select'] != 0:
             event.responsible = Staff.objects.get(id=data_from_html['responsible_select'])
 
+        event.date_event = data_from_html['date_event']
         event.link_event = data_from_html['url_event']
         event.link_form = data_from_html['url_form']
         id_current_user = request.user.pk
@@ -33,7 +35,8 @@ def event_upload(request):
     context = {
         'users': users,
         'title_page': 'Creacion de Eventos',
-        'is_active_event_upload': 'active'
+        'is_active_event_upload': 'active',
+        'date_min': str(timezone.now())[:10]
     }
 
     return render(request, 'event/event_upload.html', context)
@@ -77,8 +80,12 @@ def event_update(request, pk):
         'event': event,
         'users': users,
         'title_page': 'Actualizacion de Eventos',
-        'is_active_event_upload': 'active'
+        'is_active_event_upload': 'active',
+        'date_min': str(timezone.now())[:10],
+        'date_event': str(event.date_event)
     }
+
+    #print(event.date_event)
 
     return render(request, 'event/event_update.html', context)
 
