@@ -24,7 +24,7 @@ def category_upload(request):
         category.description = request.POST.get('description')
         category.banner = request.FILES.get('image_uploads')
         category.save()
-        return redirect('category_list')
+        return redirect('category_article_list')
 
     context = {
         'users': users,
@@ -76,7 +76,7 @@ def category_update(request, pk):
             category.banner = request.FILES.get('image_uploads')
         category.save()
 
-        return redirect('category_list')
+        return redirect('category_article_list')
     context = {
         'category': category,
         'users': users,

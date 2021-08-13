@@ -1,21 +1,29 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import User,AbstractUser
 from django.shortcuts import render, redirect
 from .models import Article
-from authentication.models import User
+from .models import Category
+from authentication.models import Staff
 
 
 def article_upload(request):
-    users = User.objects.all()
+    users = Staff.objects.all()
+    categories = Category.objects.all()
     if request.POST:
         article = Article()
 
         if request.POST.get('author_select') != "0":
-            author_select = User.objects.get(pk=request.POST.get('author_select'))
+            num = request.POST.get('author_select')
+            print("========================")
+            print(num)
+            author_select = Staff.objects.get(pk=1)
             article.author = author_select
 
+        if request.POST.get('category_select') != "0":
+            category_select = Category.objects.get(pk=request.POST.get('category_select'))
+            article.category = category_select
+
         article.name = request.POST.get('name')
-        article.category = request.POST.get('category')
         article.description = request.POST.get('description')
         article.banner = request.FILES.get('image_uploads')
         article.pdf = request.FILES.get('pdf_uploads')
@@ -24,6 +32,7 @@ def article_upload(request):
 
     context = {
         'users': users,
+        'categories': categories,
         'title_page': 'Creación de Artículo',
         'is_active_article_upload': 'active'
     }
@@ -47,13 +56,18 @@ def article_list(request):
 
 
 def article_update(request, pk):
-    users = User.objects.all()
+    users = Staff.objects.all()
     article = Article.objects.get(pk=pk)
+    categories = Category.objects.all()
     if request.POST:
 
         if request.POST.get('author_select') != "0":
-            author_select = User.objects.get(pk=request.POST.get('author_select'))
+            author_select = Staff.objects.get(pk=request.POST.get('author_select'))
             article.author = author_select
+
+        if request.POST.get('category_select') != "0":
+            category_select = Category.objects.get(pk=request.POST.get('category_select'))
+            article.category = category_select
 
         article.name = request.POST.get('name')
         article.description = request.POST.get('description')
@@ -68,6 +82,7 @@ def article_update(request, pk):
     context = {
         'article': article,
         'users': users,
+        'categories': categories,
         'title_page': 'Actualización de Artículo'
     }
     return render(request, 'article/article_update.html', context)
