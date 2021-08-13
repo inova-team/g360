@@ -5,9 +5,11 @@ from authentication.models import User
 from sponsor.models import Sponsor
 
 def sponsor_list_user(request):
+    media_path = '/media/'
     sponsors = Sponsor.objects.all()
     context = {
         'sponsors': sponsors,
+        'media_path': media_path,
         'title_page': 'Sponsors',
         'is_active_sponsors': 'active'
     }
