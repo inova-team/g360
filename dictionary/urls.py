@@ -15,4 +15,5 @@ urlpatterns = [
     path('word_delete/<int:pk>/', views.word_delete, name="word_delete"),
     path('word_update/<int:pk>/', views.word_update, name="word_update"),
     path('word_list/', views.word_list, name="word_list"),
+    path('word_list_intranet/', views.word_list_intranet, name="word_list_intranet"),
 ]

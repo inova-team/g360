@@ -47,6 +47,15 @@ def word_list(request):
     }
     return render(request, 'dictionary/word/word_list.html', context)
 
+def word_list_intranet(request):
+    words = Words.objects.all()
+    context = {
+        'words': words,
+        'title_page': 'Lista de Palabras',
+        'is_active_word_list': 'active'
+    }
+    return render(request, 'dictionary/word/word_list_intranet.html', context)
+
 
 def word_update(request, pk):
     word = Words.objects.get(pk=pk)

@@ -1,4 +1,4 @@
-{% extends 'base_intranet/base.html' %}
+{% extends 'base/base_home.html' %}
 {% load static %}
 
 {% block extrastyles %}
@@ -14,11 +14,6 @@
 {% endblock %}
 
 {% block body %}
-
-    {#    <h2>Categorías</h2>#}
-    <p>
-        <a href="{% url 'word_upload' %}" class="btn btn-primary">Crear Palabra</a>
-    </p>
     <div class="card card-plain">
         <div class="card-body">
             <div class="table-responsive">
@@ -29,8 +24,6 @@
                         <th class="text-center">Palabra</th>
                         <th class="text-center">Definición</th>
                         <th class="text-center">Categoría</th>
-                        <th class="text-center">Autor</th>
-                        <th class="disabled-sorting text-center">Acciones</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -38,8 +31,6 @@
                         <th class="text-center">Palabra</th>
                         <th class="text-center">Definición</th>
                         <th class="text-center">Categoría</th>
-                        <th class="text-center">Autor</th>
-                        <th class="disabled-sorting text-center">Acciones</th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -60,56 +51,17 @@
                                 </a>
                             </td>
                             <td>{{ word.category.name }}</td>
-                            <td>{{ word.register_author.first_name }} {{ word.register_author.last_name }}</td>
-                            <td class="text-center">
-                                <a href="{% url 'word_update' word.pk %}"
-                                   class="btn btn-round btn-success btn-icon btn-sm edit"><i
-                                        class="far fa-edit"></i></a>
-                                <a href="#" class="btn btn-round btn-danger btn-icon btn-sm remove"
-                                   data-toggle="modal"
-                                   data-target="#confirmationDeleteModal{{ word.pk }}"><i
-                                        class="fas fa-trash"></i></a>
-                            </td>
-                            <!-- Modal -->
-                            <div class="modal fade" id="confirmationDeleteModal{{ word.pk }}" tabindex="-1"
-                                 role="dialog"
-                                 aria-labelledby="confirmationDeleteModal" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Eliminar Palabra</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h5 class="modal-body" id="exampleModalLabelBody">Estás seguro de realizar
-                                                esta acción?</h5>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">
-                                                Cancelar
-                                            </button>
-                                            <a href="{% url 'word_delete' word.pk %}"
-                                               class="btn btn-danger btn-sm">Eliminar</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 {% endblock %}
 
 
 {% block extrajs %}
-
-
     <script>
         $('.popover-dismiss').popover({
             trigger: 'focus'
