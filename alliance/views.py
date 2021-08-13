@@ -4,13 +4,23 @@ from django.shortcuts import render, redirect
 from authentication.models import User
 from alliance.models import Alliance
 
+def alliance_list_user(request):
+    alliances = Alliance.objects.all()
+    context = {
+        'alliances': alliances,
+        'title_page': 'Alianzas',
+        'is_active_alliances': 'active'
+    }
+    return render(request, 'alliance/alliance_list_user.html', context)
+
+
 
 def alliance_list(request):
     alliances = Alliance.objects.all()
     context = {
         'alliances': alliances,
         'title_page': 'Lista de aliados',
-        'is_active_article_list': 'active'
+        'is_active_alliance_list': 'active'
     }
     return render(request, 'alliance/alliance_list.html', context)
 

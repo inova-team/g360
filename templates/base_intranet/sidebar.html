@@ -248,6 +248,80 @@
 
             </ul>
 
+
+        {% if is_active_sponsor_upload == 'active' or is_active_sponsor_list == 'active' %}
+                <li class="active">
+                    <a data-toggle="collapse" href="#sponsors">
+                        <i class="now-ui-icons business_briefcase-24"></i>
+                        <p>
+                            Sponsor <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse show" id="sponsors">
+                        {% else %}
+                <li>
+                <a data-toggle="collapse" href="#sponsors">
+                    <i class="now-ui-icons business_briefcase-24"></i>
+                    <p>
+                        Sponsors <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="sponsors">
+            {% endif %}
+            <ul class="nav">
+                <li class="{{ is_active_sponsor_upload }}">
+                    <a href="{% url 'sponsor_upload' %}">
+                        <span class="sidebar-mini-icon">C</span>
+                        <span class="sidebar-normal"> Crear </span>
+                    </a>
+                </li>
+                <li class="{{ is_active_sponsor_list }}">
+                    <a href="{% url 'sponsor_list' %}">
+                        <span class="sidebar-mini-icon">L</span>
+                        <span class="sidebar-normal"> Listar </span>
+                    </a>
+                </li>
+            </ul>
+            </div>
+            </li>
+
+
+        {% if is_active_alliance_upload == 'active' or is_active_alliance_list == 'active' %}
+                <li class="active">
+                    <a data-toggle="collapse" href="#alliances">
+                        <i class="now-ui-icons objects_diamond"></i>
+                        <p>
+                            Alianzas <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse show" id="alliances">
+                        {% else %}
+                <li>
+                <a data-toggle="collapse" href="#alliances">
+                    <i class="now-ui-icons objects_diamond"></i>
+                    <p>
+                        Alianzas <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="alliances">
+            {% endif %}
+            <ul class="nav">
+                <li class="{{ is_active_alliance_upload }}">
+                    <a href="{% url 'alliance_upload' %}">
+                        <span class="sidebar-mini-icon">C</span>
+                        <span class="sidebar-normal"> Crear </span>
+                    </a>
+                </li>
+                <li class="{{ is_active_alliance_list }}">
+                    <a href="{% url 'alliance_list' %}">
+                        <span class="sidebar-mini-icon">L</span>
+                        <span class="sidebar-normal"> Listar </span>
+                    </a>
+                </li>
+            </ul>
+            </div>
+            </li>
+
             {#            <li>#}
             {#                <a data-toggle="collapse" href="#formsExamples">#}
             {#                    <i class="now-ui-icons files_single-copy-04"></i>#}

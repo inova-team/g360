@@ -20,14 +20,14 @@
                         <p>Inicio</p>
                     </a>
                 </li>
-                <li class="nav-item dropdown {{ is_active_about_us }}">
-                    <a href="" class="nav-link " >
+                <li class="nav-item dropdown {{ is_active_alliances }}">
+                    <a href="{% url 'alliance_list_user' %}" class="nav-link " >
                         <i class="now-ui-icons design_app"></i>
                         <p>Alianzas</p>
                     </a>
                 </li>
-                <li class="nav-item dropdown {{ is_active_members }}">
-                    <a href="" class="nav-link ">
+                <li class="nav-item dropdown {{ is_active_sponsors }}">
+                    <a href="{% url 'sponsor_list_user' %}" class="nav-link ">
                         <i class="now-ui-icons design_app" aria-hidden="true"></i>
                         <p>Sponsors</p>
                     </a>

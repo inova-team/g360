@@ -4,13 +4,21 @@ from django.shortcuts import render, redirect
 from authentication.models import User
 from sponsor.models import Sponsor
 
+def sponsor_list_user(request):
+    sponsors = Sponsor.objects.all()
+    context = {
+        'sponsors': sponsors,
+        'title_page': 'Sponsors',
+        'is_active_sponsors': 'active'
+    }
+    return render(request, 'sponsor/sponsor_list_user.html', context)
 
 def sponsor_list(request):
     sponsors = Sponsor.objects.all()
     context = {
         'sponsors': sponsors,
         'title_page': 'Lista de Sponsor',
-        'is_active_article_list': 'active'
+        'is_active_sponsor_list': 'active'
     }
     return render(request, 'sponsor/sponsor_list.html', context)
 
