@@ -21,7 +21,7 @@ def word_upload(request):
         word.word = request.POST.get('word')
         word.definition = request.POST.get('definition')
         word.save()
-        return redirect('word_list')
+        return redirect('word_list_intranet')
 
     context = {
         'users': users,
@@ -35,17 +35,22 @@ def word_upload(request):
 def word_delete(request, pk):
     word = Words.objects.get(pk=pk)
     word.delete()
-    return redirect('word_list')
+    return redirect('word_list_intranet')
 
 
-def word_list(request):
-    words = Words.objects.all()
+def word_list(request, pk):
+    category = Word_Category.objects.get(pk=pk)
+    words = Words.objects.filter(category_id=category.pk)
+    media_path = '/media/'
     context = {
         'words': words,
-        'title_page': 'Lista de Palabras',
+        'category': category,
+        'media_path': media_path,
+        'title_page': 'Lista de palabras de la categoría',
         'is_active_word_list': 'active'
     }
     return render(request, 'dictionary/word/word_list.html', context)
+
 
 def word_list_intranet(request):
     words = Words.objects.all()
@@ -73,7 +78,7 @@ def word_update(request, pk):
         word.word = request.POST.get('word')
         word.definition = request.POST.get('definition')
         word.save()
-        return redirect('word_list')
+        return redirect('word_list_intranet')
 
     context = {
         'word': word,
@@ -96,7 +101,7 @@ def category_upload(request):
         category.description = request.POST.get('description')
         category.banner = request.FILES.get('image_uploads')
         category.save()
-        return redirect('category_list')
+        return redirect('category_list_intranet')
 
     context = {
         'users': users,
@@ -110,18 +115,29 @@ def category_upload(request):
 def category_delete(request, pk):
     category = Word_Category.objects.get(pk=pk)
     category.delete()
-    return redirect('category_list')
+    return redirect('category_list_intranet')
 
 
 def category_list(request):
     categories = Word_Category.objects.all()
+    media_path = '/media/'
     context = {
+        'media_path': media_path,
         'categories': categories,
         'title_page': 'Lista de Categorías',
         'is_active_category_list': 'active'
     }
     return render(request, 'dictionary/category/category_list.html', context)
 
+
+def category_list_intranet(request):
+    categories = Word_Category.objects.all()
+    context = {
+        'categories': categories,
+        'title_page': 'Lista de Categorías',
+        'is_active_category_list': 'active'
+    }
+    return render(request, 'dictionary/category/category_list_intranet.html', context)
 
 
 def category_update(request, pk):
@@ -139,7 +155,7 @@ def category_update(request, pk):
             category.banner = request.FILES.get('image_uploads')
         category.save()
 
-        return redirect('category_list')
+        return redirect('category_list_intranet')
     context = {
         'category': category,
         'users': users,
@@ -148,16 +164,3 @@ def category_update(request, pk):
     }
 
     return render(request, 'dictionary/category/category_update.html', context)
-
-"""
-def category_words(request, pk):
-    words = Word_Category.objects.filter(category=pk)
-    category = Word_Category.objects.get(pk=pk)
-
-    context = {
-        'words': words,
-        'category': category
-    }
-
-    return render(request, 'dictionary/category/category_articles.html', context)
-"""

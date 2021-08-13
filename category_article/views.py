@@ -48,7 +48,7 @@ def category_list(request):
         'title_page': 'Lista de Categorías',
         'is_active_category_article_list': 'active'
     }
-    return render(request, 'category_article/category_list.html', context)
+    return render(request, 'category_article/category_list_intranet.html', context)
 
 
 def category_update(request, pk):
