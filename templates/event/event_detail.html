@@ -70,7 +70,7 @@
                 <div class="col-lg-6 col-md-2 col-sm-2 col-xs-1 mx-auto">
                     <div class="text-monospace">Inscribete aquí</div>
                     <iframe class="embed-responsive-item embed-responsive-1by1"
-                            src="https://docs.google.com/forms/d/e/1FAIpQLSeveNbOCCwS8x1HujF6x7W1IHrBaOdeKLyvngwsnoOtE_3YYA/viewform?embedded=true"
+                            src="{{ event.link_form }}"
                         width="640" height="550" style="border-image-width: 10px; border-color: #3b5998">Cargando…</iframe>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                     <div class="col-md-12">
                         <h2 class="title text-center">Último eventos realizados</h2>
                         <br/>
-                        {% for article in list_articles %}
+                        {% for event in list_events %}
                             <div class="blogs-1" id="blogs-1">
                                 <div class="row">
                                     <div class="col-md-10 ml-auto mr-auto">
@@ -116,24 +116,24 @@
                                                 <div class="col-md-5">
                                                     <div class="card-image">
                                                         <img class="img img-raised rounded"
-                                                             src="{{ article.banner.url }}">
+                                                             src="{{ event.banner.url }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <h6 class="category text-info">{{ article.category }}</h6>
+                                                    <h6 class="category text-info">{{ event.category }}</h6>
                                                     <h3 class="card-title">
-                                                        <a href={% url "article_detail" pk=article.pk %}>{{ article.name }}</a>
+                                                        <a href={% url "event_detail" pk=event.pk %}>{{ event.name }}</a>
                                                     </h3>
                                                     <p class="card-description">
-                                                        {{ article.description|truncatechars:"150" }}
-                                                        <a href={% url "article_detail" pk=article.pk %}><b>Leer más</b></a>
+                                                        {{ event.description|truncatechars:"150" }}
+                                                        <a href={% url "event_detail" pk=event.pk %}><b>Leer más</b></a>
                                                     </p>
                                                     <p class="author">
                                                         por
                                                         <span>
-                                                            <b>{{ article.author }},
-                                                                <time class="timeago"
-                                                                      datetime="{{ article.publication_date|date:'c' }}"></time></b>
+                                                            <b>{{ event.responsible }},
+{#                                                                <time class="timeago"#}
+{#                                                                      datetime="{{ article.publication_date|date:'c' }}"></time></b>#}
                                                         </span>
                                                     </p>
                                                 </div>
