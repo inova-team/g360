@@ -131,7 +131,7 @@ def category_list(request):
 
 
 def category_list_intranet(request):
-    categories = Word_Category.objects.all()
+    categories = Word_Category.objects.all().order_by('name')
     context = {
         'categories': categories,
         'title_page': 'Lista de Categorías',
