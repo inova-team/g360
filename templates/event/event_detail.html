@@ -9,6 +9,8 @@
 
     </style>
 
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=60bc22d1c6f9d70011f1a021&product=inline-share-buttons' async='async'></script>
+
 {% endblock %}
 
 {% block extrahead %}
@@ -25,8 +27,7 @@
             <div class="page-header-image" data-parallax="true"
                  style="background-image: url({{ event.banner.url }});">
             </div>
-{#            Sharethis#}
-{#            <div class="sharethis-inline-share-buttons"></div>#}
+
 
             <div class="content-center">
                 <div class="row">
@@ -42,9 +43,12 @@
                     <div class="col-md-12">
                         <div class="button-container">
                             <a href="{% url 'event_repository' %}"
-                               class="btn btn-primary btn-round btn-lg">
+                               class="btn btn-linkedin btn-round btn-lg">
                                 <i class="now-ui-icons text_align-left"></i> Eventos
                             </a>
+                        </div>
+                        <div>
+                            <div class="sharethis-inline-share-buttons"></div>
                         </div>
                     </div>
                 </div>
