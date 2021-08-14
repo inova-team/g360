@@ -13,7 +13,7 @@ class Event(models.Model):
     user_last_update = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name="event_user_last_update")
     date_register = models.DateTimeField(editable=False)
     date_last_update = models.DateTimeField(editable=True, null=True)
-    date_event = models.DateField(editable=True)
+    date_event = models.DateTimeField(editable=True)
     responsible = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name="event_responsable")
     banner = models.ImageField(upload_to='article/banner/', null=True, blank=True)
     link_event = models.CharField(max_length=1000)

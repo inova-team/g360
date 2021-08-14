@@ -32,12 +32,19 @@ def event_upload(request):
         event.save()
         return redirect('event_list')
 
+    date_now = str(timezone.now())
+    # timezone.activate("America/Lima")
+    # Para conocer la ubicacion horaria de donde saca la hora
+    # print(timezone.get_current_timezone())
+
     context = {
         'users': users,
         'title_page': 'Creacion de Eventos',
         'is_active_event_upload': 'active',
-        'date_min': str(timezone.now())[:10]
+        'date_min': date_now[:10] + 'T' + date_now[11:16]
     }
+
+    # print(date_now[:10] + 'T' + date_now[11:16])
 
     return render(request, 'event/event_upload.html', context)
 
@@ -84,8 +91,6 @@ def event_update(request, pk):
         'date_min': str(timezone.now())[:10],
         'date_event': str(event.date_event)
     }
-
-    #print(event.date_event)
 
     return render(request, 'event/event_update.html', context)
 
