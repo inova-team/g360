@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import Category
-from authentication.models import User
+from category_article.models import Category
+from django.contrib.auth.models import User
 from article.models import Article
 
 
@@ -48,7 +48,7 @@ def category_list(request):
         'title_page': 'Lista de Categorías',
         'is_active_category_article_list': 'active'
     }
-    return render(request, 'category_article/category_list_intranet.html', context)
+    return render(request, 'category_article/category_list.html', context)
 
 
 def category_update(request, pk):

@@ -1,22 +1,20 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User,AbstractUser
 from django.shortcuts import render, redirect
 from .models import Article
 from .models import Category
-from authentication.models import Staff
+from django.contrib.auth.models import User
 
 
 def article_upload(request):
-    users = Staff.objects.all()
+    users = User.objects.all()
     categories = Category.objects.all()
     if request.POST:
         article = Article()
 
         if request.POST.get('author_select') != "0":
-            num = request.POST.get('author_select')
-            print("========================")
-            print(num)
-            author_select = Staff.objects.get(pk=1)
+            print("===========================")
+            print(request.POST.get('author_select'))
+            author_select = User.objects.get(pk=request.POST.get('author_select'))
             article.author = author_select
 
         if request.POST.get('category_select') != "0":
@@ -56,13 +54,13 @@ def article_list(request):
 
 
 def article_update(request, pk):
-    users = Staff.objects.all()
+    users = User.objects.all()
     article = Article.objects.get(pk=pk)
     categories = Category.objects.all()
     if request.POST:
 
         if request.POST.get('author_select') != "0":
-            author_select = Staff.objects.get(pk=request.POST.get('author_select'))
+            author_select = User.objects.get(pk=request.POST.get('author_select'))
             article.author = author_select
 
         if request.POST.get('category_select') != "0":
