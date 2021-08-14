@@ -83,15 +83,20 @@ def event_update(request, pk):
         event.save()
         return redirect('event_list')
 
+    date_event = str(event.date_event)
+
     context = {
         'event': event,
         'users': users,
         'title_page': 'Actualizacion de Eventos',
         'is_active_event_upload': 'active',
         'date_min': str(timezone.now())[:10],
-        'date_event': str(event.date_event)
+        'date_event': str(date_event[:10] + 'T' + date_event[11:16])
     }
 
+    # print(str(event.date_event))
+    # print(context['date_event'])
+    
     return render(request, 'event/event_update.html', context)
 
 
