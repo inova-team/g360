@@ -5,10 +5,17 @@ from django.shortcuts import render
 # Create your views here.
 from django.template.loader import get_template
 
+from sponsor.models import Sponsor
+
 
 def renderHome(request):
+    media_path = '/media/'
+    sponsors = Sponsor.objects.all()
     context = {
+        'sponsor_active_pk':sponsors[0].pk,
+        'sponsors': sponsors,
         'title_page' : 'Home',
+        'media_path':media_path,
         'is_active_home': 'active',
     }
     return render(request, 'home/home.html', context)
