@@ -84,13 +84,14 @@ def event_update(request, pk):
         return redirect('event_list')
 
     date_event = str(event.date_event)
+    date_now = str(timezone.now())
 
     context = {
         'event': event,
         'users': users,
         'title_page': 'Actualizacion de Eventos',
         'is_active_event_upload': 'active',
-        'date_min': str(timezone.now())[:10],
+        'date_min': date_now[:10] + 'T' + date_now[11:16],
         'date_event': str(date_event[:10] + 'T' + date_event[11:16])
     }
 
@@ -115,9 +116,12 @@ def event_list(request):
 
 def event_repository(request):
     events = Event.objects.all()
+    date_now = str(timezone.now())
+    #print(date_now[:10] + 'T' + date_now[11:19])
     context = {
         'events': events,
         'title_page': 'Eventos',
+        'date_now': date_now[:10] + 'T' + date_now[11:16]
     }
     return render(request,'event/event_repository.html',context)
 

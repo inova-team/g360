@@ -35,53 +35,71 @@
                 </div>
             </div>
         </div>
-{#        <div class="section">#}
-{#            <div class="container">#}
-{#                <div class="row">#}
-{#                    <div class="col-md-8 ml-auto mr-auto">#}
-{#                        <p class="blockquote blockquote-primary">#}
-{#                            {{ category.description }}#}
-{#                            <br>#}
-{#                            <br>#}
-{#                            <small>#}
-{#                                {{ category.responsable }}#}
-{#                            </small>#}
-{#                        </p>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
         <div class="blogs-3">
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 ml-auto mr-auto">
+                    <h3 class="title">Eventos próximos</h3>
                         {% for event in events %}
-                            <div class="card card-plain card-blog">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card-image d-flex align-items-stretch">
-                                            {% if event.banner %}
-                                                <img class="img img-raised rounded" src="{{ event.banner.url }}"
-                                                     alt="{{ event.name }}">
-                                            {% else %}
-                                                <span class="text-muted">No banner</span>
-                                            {% endif %}
+                            {% if event.date_event.isoformat >= date_now  %}
+                                <div class="card card-plain card-blog">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card-image d-flex align-items-stretch">
+                                                {% if event.banner %}
+                                                    <img class="img img-raised rounded" src="{{ event.banner.url }}"
+                                                         alt="{{ event.name }}">
+                                                {% else %}
+                                                    <span class="text-muted">No banner</span>
+                                                {% endif %}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h3 class="card-title">
-                                            <a href="{% url 'event_detail' event.pk %}">{{ event.name|truncatechars:"40" }}</a>
-                                        </h3>
-                                        <p class="card-description">
-                                            {{ event.description|truncatechars:"180" }}
-                                            <a href="{% url 'event_detail' event.pk %}"> Read More </a>
-                                        </p>
-                                        <div class="author">
-                                            <span>{{ event.date_event }}, {{ event.responsible }}</span>
+                                        <div class="col-md-8">
+                                            <h3 class="card-title">
+                                                <a href="{% url 'event_detail' event.pk %}">{{ event.name|truncatechars:"40" }}</a>
+                                            </h3>
+                                            <p class="card-description">
+                                                {{ event.description|truncatechars:"180" }}
+                                                <a href="{% url 'event_detail' event.pk %}"> Read More </a>
+                                            </p>
+                                            <div class="author">
+                                                <span>{{ event.date_event }}, {{ event.responsible }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    <h3 class="title">Eventos realizados</h3>
+                        {% for event in events %}
+                            {% if event.date_event.isoformat < date_now  %}
+                                <div class="card card-plain card-blog">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card-image d-flex align-items-stretch">
+                                                {% if event.banner %}
+                                                    <img class="img img-raised rounded" src="{{ event.banner.url }}"
+                                                         alt="{{ event.name }}">
+                                                {% else %}
+                                                    <span class="text-muted">No banner</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h3 class="card-title">
+                                                <a href="{% url 'event_detail' event.pk %}">{{ event.name|truncatechars:"40" }}</a>
+                                            </h3>
+                                            <p class="card-description">
+                                                {{ event.description|truncatechars:"180" }}
+                                                <a href="{% url 'event_detail' event.pk %}"> Read More </a>
+                                            </p>
+                                            <div class="author">
+                                                <span>{{ event.date_event }}, {{ event.responsible }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
