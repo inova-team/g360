@@ -29,7 +29,7 @@
                         <th class="text-center">Palabra</th>
                         <th class="text-center">Definición</th>
                         <th class="text-center">Categoría</th>
-                        <th class="text-center">Autor</th>
+                        {% comment %}<th class="text-center">Autor</th>{% endcomment %}
                         <th class="disabled-sorting text-center">Acciones</th>
                     </tr>
                     </thead>
@@ -38,28 +38,22 @@
                         <th class="text-center">Palabra</th>
                         <th class="text-center">Definición</th>
                         <th class="text-center">Categoría</th>
-                        <th class="text-center">Autor</th>
+                        {% comment %}<th class="text-center">Autor</th>{% endcomment %}
                         <th class="disabled-sorting text-center">Acciones</th>
                     </tr>
                     </tfoot>
                     <tbody>
                     {% for word in words %}
                         <tr>
-                            <td>{{ word.word }}
-                                <a tabindex="0" class="btn btn-primary btn-link" role="button" data-toggle="popover"
-                                   data-trigger="focus" title="{{ word.word }}"
-                                   data-content="{{ word.definition}}">
-                                   {{ word.word }}
-                                </a>
-                            </td>
-                            <td>{{ word.definition|truncatechars:"100" }}
+                            <td>{{ word.word }}</td>
+                            <td>{{ word.definition|truncatechars:"200" }}
                                 <a tabindex="0" class="btn btn-primary btn-link" role="button" data-toggle="popover"
                                    data-trigger="focus" title="Leer"
                                    data-content="{{ word.definition}}">
                                    Leer
                                 </a>
                             </td>
-                            <td>{{ word.category.name }}</td>
+                           {% comment %} <td>{{ word.category.name }}</td>{% endcomment %}
                             <td>{{ word.register_author.first_name }} {{ word.register_author.last_name }}</td>
                             <td class="text-center">
                                 <a href="{% url 'word_update' word.pk %}"
