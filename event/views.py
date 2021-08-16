@@ -129,9 +129,11 @@ def event_repository(request):
 @login_required(login_url='g360Login')
 def event_detail(request, pk):
     event = Event.objects.filter(pk=pk).exists()
+    date_now = str(timezone.now())
+    date_filter = date_now[:19]
     if event:
         event = Event.objects.get(pk=pk)
-        list_events = Event.objects.order_by('-date_event').exclude(pk=pk)[0:3]
+        list_events = Event.objects.filter(date_event__lt=date_filter).order_by('-date_event').exclude(pk=pk)[0:3]
         context = {
             'event': event,
             'title_page': event.name,
