@@ -126,7 +126,6 @@ def event_repository(request):
     return render(request,'event/event_repository.html',context)
 
 
-@login_required(login_url='g360Login')
 def event_detail(request, pk):
     event = Event.objects.filter(pk=pk).exists()
     date_now = str(timezone.now())

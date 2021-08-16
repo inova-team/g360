@@ -1,0 +1,73 @@
+<div class="blogs-1" id="blogs-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 ml-auto mr-auto">
+                <h2 class="title"><a href="{% url 'event_repository' %}">Eventos realizados</a></h2>
+                <br/>
+                {% for event in events %}
+                    {% if forloop.counter == 2 %}
+                        <div class="card card-plain card-blog">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="card-image">
+                                        <img class="img img-raised rounded" src="{{ event.banner.url }}"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+{#                                    <h6 class="category text-info mt-3">Enterprise</h6>#}
+                                    <h3 class="card-title">
+                                        <a href="{% url 'event_detail' event.pk %}">{{ event.name }}</a>
+                                    </h3>
+                                    <p class="card-description">
+                                        {{ event.description |truncatechars:"100" }}
+                                        <a href="{% url 'event_detail' event.pk %}"> Read More </a>
+                                    </p>
+                                    <p class="author">
+                                        por
+                                        <a href="#pablo">
+                                            <b>{{ event.responsible }}</b>
+                                        </a>,
+                                        <b>{{ event.date_event }}</b>
+{#                                        <time class="timeago" datetime="{{ flash.publication_date|date:'c' }}"></time>#}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="card card-plain card-blog">
+                            <div class="row">
+                                <div class="col-md-7">
+{#                                    <h6 class="category text-danger">#}
+{#                                        <i class="now-ui-icons now-ui-icons media-2_sound-wave"></i> Startup#}
+{#                                    </h6>#}
+                                    <h3 class="card-title">
+                                        <a href="{% url 'event_detail' event.pk %}">{{ event.name }}</a>
+                                    </h3>
+                                    <p class="card-description">
+                                        {{ event.description |truncatechars:"150" }}
+                                        <a href="{% url 'event_detail' event.pk %}"> Read More </a>
+                                    </p>
+                                    <p class="author">
+                                        por
+                                        <a href="#pablo">
+                                            <b>{{ event.responsible }}</b>
+                                        </a>,
+                                        <b>{{ event.date_event }}</b>
+{#                                        <time class="timeago" datetime="{{ event.date_event|date:'c' }}"></time>#}
+                                    </p>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="card-image">
+                                        <img class="img img-raised rounded
+                                " src="{{ event.banner.url }}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

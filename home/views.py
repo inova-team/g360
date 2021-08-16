@@ -4,23 +4,30 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.template.loader import get_template
+from django.utils import timezone
 
+from event.models import Event
 from sponsor.models import Sponsor
 
 
-def renderHome(request):
+def render_home(request):
     media_path = '/media/'
     sponsors = Sponsor.objects.all()
+    date_now = str(timezone.now())
+    date_filter = date_now[:19]
+    events = Event.objects.filter(date_event__lt=date_filter).order_by('-date_event')[0:3]
     context = {
-        'sponsor_active_pk':sponsors[0].pk,
+        'sponsor_active_pk': sponsors[0].pk,
         'sponsors': sponsors,
-        'title_page' : 'Home',
-        'media_path':media_path,
+        'title_page': 'Home',
+        'media_path': media_path,
         'is_active_home': 'active',
+        'events': events
     }
     return render(request, 'home/home.html', context)
 
-def renderContactUs_email(request):
+
+def render_contact_us_email(request):
     data = {}
     if request.POST:
 
@@ -56,8 +63,9 @@ def renderContactUs_email(request):
 
         return JsonResponse(data)
 
+
 #@login_required(login_url='')
-def renderIntranet(request):
+def render_intranet(request):
     context = {
         'title_page': 'Intranet',
         'is_active_intranet': 'active'
