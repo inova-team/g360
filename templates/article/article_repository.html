@@ -1,0 +1,152 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extrastyles %}
+    <style>
+        .card-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        @supports (object-fit: cover) {
+            .card-image img {
+                height: 100%;
+                min-height: 13rem;
+                object-fit: cover;
+                object-position: center center;
+            }
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="page-header page-header-small">
+            <div class="page-header-image" data-parallax="true"
+                 style="background-image: url('{% static 'img/g360/banner_events3.jpg' %}');">
+            </div>
+            <div class="content-center">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2 class="title">Artículos</h2>
+                        <h4>Conoce los artículos que hemos preparado</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="blogs-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 ml-auto mr-auto">
+                    <h3 class="title">Eventos próximos</h3>
+                        {% for event in events %}
+                            {% if event.date_event.isoformat >= date_now  %}
+                                <div class="card card-plain card-blog">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card-image d-flex align-items-stretch">
+                                                {% if event.banner %}
+                                                    <img class="img img-raised rounded" src="{{ event.banner.url }}"
+                                                         alt="{{ event.name }}">
+                                                {% else %}
+                                                    <span class="text-muted">No banner</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h3 class="card-title">
+                                                <a href="{% url 'event_detail' event.pk %}">{{ event.name|truncatechars:"40" }}</a>
+                                            </h3>
+                                            <p class="card-description">
+                                                {{ event.description|truncatechars:"180" }}
+                                                <a href="{% url 'event_detail' event.pk %}"> Read More </a>
+                                            </p>
+                                            <div class="author">
+                                                <span>{{ event.date_event }}, {{ event.responsible }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    <h3 class="title">Eventos realizados</h3>
+                        {% for event in events %}
+                            {% if event.date_event.isoformat < date_now  %}
+                                <div class="card card-plain card-blog">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card-image d-flex align-items-stretch">
+                                                {% if event.banner %}
+                                                    <img class="img img-raised rounded" src="{{ event.banner.url }}"
+                                                         alt="{{ event.name }}">
+                                                {% else %}
+                                                    <span class="text-muted">No banner</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h3 class="card-title">
+                                                <a href="{% url 'event_detail' event.pk %}">{{ event.name|truncatechars:"40" }}</a>
+                                            </h3>
+                                            <p class="card-description">
+                                                {{ event.description|truncatechars:"180" }}
+                                                <a href="{% url 'event_detail' event.pk %}"> Read More </a>
+                                            </p>
+                                            <div class="author">
+                                                <span>{{ event.date_event }}, {{ event.responsible }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'event/../assets/contact_us_section.html' %}
+
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        $(document).ready(function () {
+            $("#alert_success").hide();
+            $("#alert_danger").hide();
+            $("time.timeago").timeago();
+
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+                let parameters = $(this).serializeArray();
+                console.log(parameters);
+                $.ajax({
+                    url: '{% url 'contact_us' %}',
+                    type: 'POST',
+                    data: parameters,
+                    dataType: 'json'
+                }).done(function (data) {
+                    //si no hay error
+                    if (!data.hasOwnProperty('error')) {
+                        $("#alert_success").text(data['exito']);
+                        $("#alert_success").fadeTo(2000, 500).slideUp(500, function () {
+                            $("#alert_success").slideUp(500);
+                        });
+                        $('form')[0].reset();
+                        return false;
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    $("#alert_success").text(textStatus + ': ' + errorThrown);
+                    $("#alert_danger").fadeTo(2000, 500).slideUp(500, function () {
+                        $("#alert_danger").slideUp(500);
+                    });
+                }).always(function (data) {
+
+                })
+            })
+        });
+    </script>
+
+{% endblock %}

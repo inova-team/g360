@@ -53,6 +53,16 @@ def article_list(request):
     return render(request, 'article/article_list.html', context)
 
 
+def article_repository(request):
+    articles = Article.objects.all()
+    context = {
+        'articles': articles,
+        'title_page': 'Lista de Artículos',
+        'is_active_article_list': 'active'
+    }
+    return render(request, 'article/article_repository.html', context)
+
+
 def article_update(request, pk):
     users = User.objects.all()
     article = Article.objects.get(pk=pk)
