@@ -1,41 +1,84 @@
 {% load static %}
 
-<div class="container" style="max-height: 500px;width: 1000px;">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-12">
-            <div id="carouselSponsors" class="carousel slide" data-ride="carousel" data-interval="3000">
-                <ol class="carousel-indicators">
-{#                    {% for sponsor in sponsors %}#}
-{#                        {% if sponsor.pk == sponsor_active_pk %}#}
-{#                            <li data-target="#carouselSponsors" data-slide-to="0" class="active"></li>#}
-{#                        {% else %}#}
-{#                            <li data-target="#carouselSponsors" data-slide-to="1" class=""></li>#}
-{#                        {% endif %}#}
-{#                    {% endfor %}#}
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    {% for sponsor in sponsors %}
-                        {% if sponsor.pk == sponsor_active_pk %}
-                            <div class="carousel-item active">
-                        {% else %}
-                            <div class="carousel-item">
-                        {% endif %}
-                    <img class="d-block" src="{{ media_path }}{{ sponsor.banner }}" alt="{{ sponsor.name }}">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>{{ sponsor.name }}</h5>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="custom.js"></script>
+
+<style>
+    .brand-carousel {
+        margin-top: 10%;
+    }
+
+    .owl-dots {
+        text-align: center;
+        margin-top: 4%;
+    }
+
+    .owl-dot {
+        display: inline-block;
+        height: 15px !important;
+        width: 15px !important;
+        background-color: #878787 !important;
+        opacity: 0.8;
+        border-radius: 50%;
+        margin: 0 5px;
+    }
+
+    .owl-dot.active {
+        background-color: #000 !important;
+    }
+
+    {% comment %} #sponsor-carousel{
+         background-color: #333;
+         padding-top: 2px;
+         padding-bottom: 40px;
+     }
+
+     .single-logo {
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 5px;
+         min-height: 150px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         margin: 5px 0;
+     }{% endcomment %}
+
+</style>
+{% if sponsors %}
+    <div class="container-fluid" id="sponsor-carousel">
+        <div class="container">
+            <div class="brand-carousel owl-carousel">
+                {% for sponsor in sponsors %}
+                    <div class="single-logo">
+                        <img src="{{ media_path }}{{ sponsor.banner }}">
                     </div>
-                    </div>
-                    {% endfor %}
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselSponsors" role="button" data-slide="prev">
-                        <i class="now-ui-icons arrows-1_minimal-left"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselSponsors" role="button" data-slide="next">
-                        <i class="now-ui-icons arrows-1_minimal-right"></i>
-                    </a>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+{% endif %}
 
+<script>
+    $('.brand-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 5
+            }
+        }
+    })
 
+</script>

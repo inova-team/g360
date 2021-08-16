@@ -17,7 +17,6 @@ def render_home(request):
     date_filter = date_now[:19]
     events = Event.objects.filter(date_event__lt=date_filter).order_by('-date_event')[0:3]
     context = {
-        'sponsor_active_pk': sponsors[0].pk,
         'sponsors': sponsors,
         'title_page': 'Home',
         'media_path': media_path,
