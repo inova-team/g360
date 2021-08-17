@@ -8,37 +8,26 @@
                 <h4 class="description">Aca iria una descripcion sobre esta seccion...etc</h4>
             </div>
         </div>
-    <div class="row">
+        <div class="row px-2">
             <div class="col-md-10 ml-auto mr-auto">
                 <div class="row d-flex justify-content-center">
                     {% for alliance in alliances %}
-                        <div class="col-md-4 d-flex align-items-stretch">
-                            <div class="card card-blog">
-                                <div class="card-image">
-                                    <a href="{% url 'alliance_detail_user' alliance.pk %}">
-                                        {% if alliance.banner %}
-                                            <img class="img rounded" src="{{ media_path }}{{ alliance.banner }}"
-                                                 alt="{{ alliance.name }}">
-                                        {% else %}
-                                            <span class="text-muted">Sin imagen</span>
-                                        {% endif %}
+                        <div class="card card-plain card-blog">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card-image">
+                                         <a href="{% url 'alliance_detail_user' alliance.pk %}">
+                                        <img class="img img-raised rounded" src="{{ media_path }}{{ alliance.banner }}"/>
                                     </a>
-                                </div>
-                                <div class="card-body">
-{#                                    <h6 class="category text-primary">Features</h6>#}
-                                    <a href="{% url 'alliance_detail_user' alliance.pk %}">
-                                        <h5 class="card-title">
-                                            {{ alliance.name|truncatechars:"100" }}
-                                        </h5>
-                                    </a>
-                                        <p class="card-description">
-                                            {{ alliance.description|truncatechars:"100" }}
-                                        </p>
-                                    <div class="card-footer">
-{#                                        <div class="author">#}
-{#                                            <span>{{ subcategory.responsable }}</span>#}
-{#                                        </div>#}
                                     </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h3 class="card-title">
+                                        <a href="{% url 'alliance_detail_user' alliance.pk %}">{{ alliance.name }}</a>
+                                    </h3>
+                                    <p class="card-description">
+                                        {{ alliance.description|truncatechars:"100" }}
+                                    </p>
                                 </div>
                             </div>
                         </div>

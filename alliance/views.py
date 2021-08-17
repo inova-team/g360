@@ -93,6 +93,7 @@ def alliance_update(request, pk):
         alliance.website_link = request.POST.get('website_link')
 
         if request.FILES.get('image_uploads'):
+            alliance.banner.delete()
             alliance.banner = request.FILES.get('image_uploads')
         alliance.save()
 
