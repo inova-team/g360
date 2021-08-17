@@ -9,37 +9,26 @@
                     user engaged by providing meaningful information.</h4>
             </div>
         </div>
-        <div class="row">
+        <div class="row px-2">
             <div class="col-md-10 ml-auto mr-auto">
                 <div class="row d-flex justify-content-center">
                     {% for sponsor in sponsors %}
-                        <div class="col-md-4 d-flex align-items-stretch">
-                            <div class="card card-blog">
-                                <div class="card-image">
-                                    <a href="{% url 'sponsor_detail_user' sponsor.pk %}">
-                                        {% if sponsor.banner %}
-                                            <img class="img rounded" src="{{ media_path }}{{ sponsor.banner }}"
-                                                 alt="{{ sponsor.name }}">
-                                        {% else %}
-                                            <span class="text-muted">Sin imagen</span>
-                                        {% endif %}
+                        <div class="card card-plain card-blog">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card-image">
+                                         <a href="{% url 'sponsor_detail_user' sponsor.pk %}">
+                                        <img class="img img-raised rounded" src="{{ media_path }}{{ sponsor.banner }}"/>
                                     </a>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-{#                                    <h6 class="category text-primary">Features</h6>#}
-                                    <a href="{% url 'sponsor_detail_user' sponsor.pk %}">
-                                        <h5 class="card-title">
-                                            {{ sponsor.name|truncatechars:"100" }}
-                                        </h5>
-                                    </a>
+                                <div class="col-md-8">
+                                    <h3 class="card-title">
+                                        <a href="{% url 'sponsor_detail_user' sponsor.pk %}">{{ sponsor.name }}</a>
+                                    </h3>
                                     <p class="card-description">
                                         {{ sponsor.description|truncatechars:"100" }}
                                     </p>
-                                    <div class="card-footer">
-                                        {#                                        <div class="author">#}
-                                        {#                                            <span>{{ sponsor.responsable }}</span>#}
-                                        {#                                        </div>#}
-                                    </div>
                                 </div>
                             </div>
                         </div>

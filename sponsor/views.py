@@ -92,6 +92,7 @@ def sponsor_update(request, pk):
         sponsor.website_link = request.POST.get('website_link')
 
         if request.FILES.get('image_uploads'):
+            sponsor.banner.delete()
             sponsor.banner = request.FILES.get('image_uploads')
         sponsor.save()
 
