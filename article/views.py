@@ -84,8 +84,10 @@ def article_update(request, pk):
         article.description = request.POST.get('description')
 
         if request.FILES.get('image_uploads'):
+            article.banner.delete()
             article.banner = request.FILES.get('image_uploads')
         if request.FILES.get('pdf_uploads'):
+            article.pdf.delete()
             article.pdf = request.FILES.get('pdf_uploads')
         article.save()
 

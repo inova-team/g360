@@ -73,6 +73,7 @@ def category_update(request, pk):
         category.description = request.POST.get('description')
 
         if request.FILES.get('image_uploads'):
+            category.banner.delete()
             category.banner = request.FILES.get('image_uploads')
         category.save()
 
