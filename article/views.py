@@ -54,9 +54,12 @@ def article_list(request):
 
 
 def article_repository(request):
+    categories = Category.objects.all()
     articles = Article.objects.all()
+
     context = {
         'articles': articles,
+        'categories': categories,
         'title_page': 'Lista de Artículos',
         'is_active_article_list': 'active'
     }
@@ -97,22 +100,26 @@ def article_update(request, pk):
 
 
 def article_detail(request, pk):
-    article = Article.objects.filter(pk=pk).exists()
-    if article:
-        article = Article.objects.get(pk=pk)
-        id_category = article.category_id
-        list_articles = Article.objects.filter(category_id=id_category).exclude(pk=pk).order_by('-publication_date')[
-                        0:3]
-        author = User.objects.get(username=article.author.user)
-        context = {
-            'article': article,
-            'list_articles': list_articles,
-            'author': author,
-            'id_category': id_category
-        }
-        return render(request, "article/article_detail.html", context)
-    else:
-        return redirect('home')
+
+    print("=======================")
+    print(pk)
+    print("=======================")
+    article = Article.objects.get(pk=pk)
+    id_category = article.category_id
+    list_articles = Article.objects.filter(category_id=id_category).exclude(pk=pk).order_by('-publication_date')[
+                    0:3]
+
+    print("=================================")
+    print(article.author_id)
+    author = User.objects.get(pk=article.author_id)
+    print("===========HOLA========")
+    context = {
+        'article': article,
+        'list_articles': list_articles,
+        'author': author,
+        'id_category': id_category
+    }
+    return render(request, "article/article_detail.html", context)
 
 
 def article_list_search(request, pk):
