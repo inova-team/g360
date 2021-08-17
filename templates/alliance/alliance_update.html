@@ -128,7 +128,7 @@
                         </div>
 
                         <div class="formulario__mensaje" id="formulario__mensaje">
-                            <div class="alert alert-primary text-center" id="message_upload_error"
+                            <div class="alert alert-primary text-center" id="message_update_error"
                                  style="display:none;">
                                 <span><b> Por favor rellenar campos obligatorios del formulario. </b></span>
                             </div>
@@ -154,7 +154,7 @@
     <script>
 
         const inputImage = document.getElementById('image_uploads');
-        const p_error = document.getElementById('message_upload_error');
+        const p_error = document.getElementById('message_update_error');
 
         inputImage.addEventListener('change', updateImageDisplay);
 
@@ -206,13 +206,13 @@
 
         function validateAllianceUpdateForm() {
             let correct = false;
-            let pdfsOk = true;
             let imagesOk = true;
 
-            let name = document.forms["alliance_upload_form"]["name"].value;
-            let description = document.forms["alliance_upload_form"]["description"].value;
-            let author = document.forms["alliance_upload_form"]["author_select"].value;
-            let type = document.forms["alliance_upload_form"]["type"].value;
+            let name = document.forms["alliance_update_form"]["name"].value;
+            let description = document.forms["alliance_update_form"]["description"].value;
+            let author = document.forms["alliance_update_form"]["author_select"].value;
+            let type = document.forms["alliance_update_form"]["type"].value;
+
 
 
             let curFiles = inputImage.files;
