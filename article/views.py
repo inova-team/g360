@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.core import serializers
 from django.shortcuts import render, redirect
 from .models import Article
 from .models import Category
@@ -45,8 +47,12 @@ def article_delete(request, pk):
 
 def article_list(request):
     articles = Article.objects.all()
+    categories = Category.objects.all()
+
     context = {
         'articles': articles,
+        'categories': categories,
+
         'title_page': 'Lista de Artículos',
         'is_active_article_list': 'active'
     }
@@ -56,10 +62,11 @@ def article_list(request):
 def article_repository(request):
     categories = Category.objects.all()
     articles = Article.objects.all()
-
+    media_path = '/media/'
     context = {
         'articles': articles,
         'categories': categories,
+        'media_path': media_path,
         'title_page': 'Lista de Artículos',
         'is_active_article_list': 'active'
     }
@@ -102,7 +109,6 @@ def article_update(request, pk):
 
 
 def article_detail(request, pk):
-
     print("=======================")
     print(pk)
     print("=======================")
@@ -133,3 +139,22 @@ def article_list_search(request, pk):
 
     }
     return render(request, "article/article_filter.html", context)
+
+
+def articles_list_category(request):
+    id_category = request.POST['category_id']
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    print(id_category)
+
+    if (id_category == '0'):
+        articles = Article.objects.all()
+        ser_instance = serializers.serialize('json', articles)
+        print("Todos")
+    else:
+        articles = Article.objects.filter(category_id=id_category).order_by('-publication_date')
+        ser_instance = serializers.serialize('json', articles)
+        print("por categoria")
+
+    print(ser_instance)
+
+    return JsonResponse({"articles": ser_instance}, status=200)

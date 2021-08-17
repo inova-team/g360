@@ -41,36 +41,57 @@
 
         <div class="blogs-3">
             <div class="container">
-        <div class="section">
-          <h3 class="title text-center">Artículos más recientes</h3>
-          <br/>
-        <div class="row">
-              {% for article in articles %}
-            <div class="col-md-4">
-              <div class="card card-plain card-blog">
-                <div class="card-image">
-                  <a href="{% url 'article_detail' article.pk %}">
-                    <img class="img rounded img-raised" src={{ article.banner.url }}/>
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title"> {{ article.name }}
-                    <a href="{% url 'article_detail' article.pk %}"></a>
-                  </h4>
-                  <p class="card-description">{{ article.description|truncatechars:"180" }}
-                    <a href="{% url 'article_detail' article.pk %}" > Leer más </a>
-                    <div class="author">
-                      <span>{{ article.author }}</span>
-                    </div>
-                  </p>
-                </div>
-              </div>
-            </div>
-              {% endfor %}
+                <div class="section">
+                    <h3 class="title text-center">Artículos más recientes</h3>
+                    <br/>
 
-          </div>
-        </div>
-      </div>
+                    <div class="row">
+                        <div class="col-1 justify-content-center">
+                            <label for="category_select">Categoría:</label>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <select id="category_select" name="category_select" class="form-control form-control-lg"
+                                        onchange="articles_list_category()">
+                                    <option value="0">---------</option>
+                                    {% for categorie in categories %}
+                                        <option value="{{ categorie.pk }}">{{ categorie.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                  {% comment %}  <div class="row mt-3">
+                        {% for article in articles %}
+                            <div class="col-md-4">
+                                <div class="card card-plain card-blog">
+                                    <div class="card-image">
+                                        <a href="{% url 'article_detail' article.pk %}">
+                                            <img class="img rounded img-raised" src={{ article.banner.url }}/>
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title"> {{ article.name }}
+                                            <a href="{% url 'article_detail' article.pk %}"></a>
+                                        </h4>
+                                        <p class="card-description">{{ article.description|truncatechars:"180" }}
+                                            <a href="{% url 'article_detail' article.pk %}"> Leer más </a>
+                                        <div class="author">
+                                            <span>{{ article.author }}</span>
+                                        </div>
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button class="btn btn-primary"> Ver mas</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>{% endcomment %}
+                    <div id="articles_list" class="row mt-3"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -79,6 +100,68 @@
 {% endblock %}
 
 {% block extrajs %}
+
+    <script>
+        $(document).ready(function () {
+            articles_list_category();
+        });
+
+        function redirect_detail_article(id_article) {
+            document.location.href = "../../article/article_detail/" + id_article;
+        }
+
+        function articles_list_category() {
+            console.log('dentro de listar articulos')
+            console.log($("#category_select").val())
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'articles_list_category' %}",
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    category_id: $("#category_select").val(),
+                },
+                success: function (response) {
+                    var instance = JSON.parse(response['articles']);
+                    console.log(instance);
+                    console.log({{ media_path }})
+                    var i;
+                    var numero = instance.length;
+                    var data = '';
+
+                    for (i = 0; i < numero; i++) {
+                        data += (
+                            '    <div class="col-md-4">' +
+                            '        <div class="card card-plain card-blog">' +
+                            '            <div class="card-image">' +
+                            '                    <img class="img rounded img-raised" onclick="redirect_detail_article(' + instance[i]["pk"] + ')" src=' + {{ media_path }} +instance[i]["fields"].banner + '/>' +
+                            '            </div>' +
+                            '            <div class="card-body">' +
+                            '                <h4 class="card-title" )>' + instance[i]["fields"].name +
+                            '                </h4>' +
+                            '                <p class="card-description">' + instance[i]["fields"].description.substr(0, 200) + '...' +
+                            '                <buttom> ' +
+                            '                </p>' +
+                            '            </div>' +
+                            '            <div class="card-footer">' +
+                            '                <button class="btn btn-primary" onclick="redirect_detail_article(' + instance[i]["pk"] + ')"> Ver mas</button>' +
+                            '            </div>' +
+                            '        </div>' +
+                            '    </div>'
+                        )
+                    }
+                    $("#articles_list").empty();
+                    $("#articles_list").append(data);
+                },
+                error: function (response) {
+                    console.log('Ocurrio un error')
+                    alert(response["responseJSON"]["error"]);
+                }
+            });
+        }
+
+
+    </script>
+
     <script>
         $(document).ready(function () {
             $("#alert_success").hide();

@@ -8,6 +8,7 @@ urlpatterns = [
     path('article_update/<int:pk>/', views.article_update, name='article_update'),
     path('article_detail/<int:pk>/', views.article_detail, name='article_detail'),
     path('article_list_search/<int:pk>/', views.article_list_search, name='article_list_search'),
+    path('articles_list_category/', views.articles_list_category, name='articles_list_category'),
     path('article_list', views.article_list, name='article_list'),
     path('', views.article_repository, name='article_repository'),
 ]
