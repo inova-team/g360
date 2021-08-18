@@ -3,16 +3,26 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from authentication.models import User
 from sponsor.models import Sponsor
+import random
 
 
 def sponsor_detail_user(request, pk):
     sponsor = Sponsor.objects.filter(pk=pk).exists()
+    media_path = '/media/'
+    other_sponsors = Sponsor.objects.filter(is_active=1).exclude(pk=pk)
+    random_items = {}
+    if (len(other_sponsors)>1):
+        random_items = random.sample(list(other_sponsors), 2)
+    if (len(other_sponsors)==1):
+        random_items = other_sponsors
     if sponsor:
         sponsor = Sponsor.objects.get(pk=pk)
         context = {
             'sponsor': sponsor,
+            'media_path': media_path,
             'is_active_sponsors': 'active',
             'title_page': sponsor.name,
+            'others':random_items
         }
         return render(request, "sponsor/sponsor_detail_user.html", context)
     else:

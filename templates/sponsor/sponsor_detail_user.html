@@ -8,7 +8,6 @@
 
 {% block body %}
     <div class="cd-section" id="headers">
-
         <div class="page-header page-header-small">
             <div class="page-header-image" data-parallax="true"
                  style="background-image:url({{ sponsor.banner.url }});">
@@ -22,63 +21,122 @@
                 </div>
             </div>
         </div>
-
         <div class="container">
-        <div class="row">
-            <div class="col-md-5 ml-auto mr-auto d-flex">
-                <div class="align-self-center">
-                    <h3 class="title">{{ sponsor.description}}</h3>
-                <p class="description">{{ sponsor.description }}
-                    <br>
-                    <br>
-                </p>
-                </div>
-
-
-            </div>
-            <div class="col-md-5 ml-auto mr-auto">
-                <div class="info info-horizontal mt-5">
-                    <div class="icon icon-primary" style="color: #3b5998">
-                        <i class="now-ui-icons location_pin"></i>
-                    </div>
-                    <div class="description">
-                        <h4 class="info-title">Sitio Web</h4>
-                    </div>
-                    <div class="icon icon-primary" style="color: #3b5998">
-                        <i class="now-ui-icons tech_mobile"></i>
-                    </div>
-                    <div class="description">
-                        <h4 class="info-title">Redes Sociales</h4>
-                        <p> Michael Jordan
-                            <br> +40 762 321 762
-                            <br> Mon - Fri, 8:00-22:00
+            <div class="row">
+                <div class="col-md-5 ml-auto mr-auto d-flex mt-5">
+                    <div class="align-self-center">
+                        <p class="description">{{ sponsor.description }}
+                            <br>
+                            <br>
                         </p>
                     </div>
-{#                    <div class="icon icon-primary" style="color: #3b5998">#}
-{#                        <i class="business_briefcase-24 now-ui-icons"></i>#}
-{#                    </div>#}
-{#                    <div class="description">#}
-{#                        <h4 class="info-title">Legal Information</h4>#}
-{#                        <p> Creative Tim Ltd.#}
-{#                            <br> VAT · EN2341241#}
-{#                            <br> IBAN · EN8732ENGB2300099123#}
-{#                            <br> Bank · Great Britain Bank#}
-{#                        </p>#}
-{#                    </div>#}
+                </div>
+                <div class="col-md-5 ml-auto mr-auto">
+                    <div class="info info-horizontal mt-5 p-0">
+                        {% if sponsor.website_link %}
+                            <a href="{{ sponsor.website_link }}">
+                                <div class="icon icon-primary" style="color: #3b5998">
+                                    <i class="now-ui-icons location_pin"></i>
+                                </div>
+                                <div class="description">
+                                    <h4 class="info-title">Sitio Web</h4>
+                                </div>
+                            </a>
+                        {% endif %}
+                        {% if sponsor.instagram_link or sponsor.fb_link or sponsor.twitter_link %}
+                            <div class="icon icon-primary" style="color: #3b5998">
+                                <i class="now-ui-icons tech_mobile"></i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">Redes Sociales</h4>
+                                <ul class="social-buttons p-0 list-group list-group-horizontal">
+                                    {% if sponsor.twitter_link %}
+                                        <li>
+                                            <a href="{{ sponsor.twitter_link }}"
+                                               class="btn btn-icon btn-neutral btn-twitter btn-lg list-group-item m-0">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if sponsor.fb_link %}
+                                        <li>
+                                            <a href="{{ sponsor.fb_link }}"
+                                               class="btn btn-icon btn-neutral btn-facebook btn-lg list-group-item m-0">
+                                                <i class="fab fa-facebook-square"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if sponsor.instagram_link %}
+                                        <li>
+                                            <a href="{{ sponsor.instagram_link }}"
+                                               class="btn btn-icon btn-neutral btn-dribbble btn-lg list-group-item m-0">
+                                                <i class="fab fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {#                                    <li>#}
+                                    {#                                        <a href="{{ sponsor.youtube_link }}" class="btn btn-icon btn-neutral btn-youtube btn-lg list-group-item m-0">#}
+                                    {#                                            <i class="fab fa-youtube"></i>#}
+                                    {#                                        </a>#}
+                                    {#                                    </li>#}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {#                    <div class="icon icon-primary" style="color: #3b5998">#}
+                    {#                        <i class="business_briefcase-24 now-ui-icons"></i>#}
+                    {#                    </div>#}
+                    {#                    <div class="description">#}
+                    {#                        <h4 class="info-title">Legal Information</h4>#}
+                    {#                        <p> Creative Tim Ltd.#}
+                    {#                            <br> VAT · EN2341241#}
+                    {#                            <br> IBAN · EN8732ENGB2300099123#}
+                    {#                            <br> Bank · Great Britain Bank#}
+                    {#                        </p>#}
+                    {#                    </div>#}
                 </div>
             </div>
+            {% if others %}
+                <div class="separator-line separator-primary"></div>
+                <div class="row px-2">
+                    <div class="col-md-10 ml-auto mr-auto">
+                        <div class="row d-flex justify-content-center">
+                            <h2 class="title">Otros patrocinadores</h2>
+
+                            {% for sponsor in others %}
+                                <div class="card card-plain card-blog">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card-image">
+                                                <a href="{% url 'sponsor_detail_user' sponsor.pk %}">
+                                                    <img class="img img-raised rounded"
+                                                         src="{{ media_path }}{{ sponsor.banner }}"/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h3 class="card-title">
+                                                <a href="{% url 'sponsor_detail_user' sponsor.pk %}">{{ sponsor.name }}</a>
+                                            </h3>
+                                            <p class="card-description">
+                                                {{ sponsor.description|truncatechars:"100" }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
+    </div>
+    <div class="separator-line separator-primary"></div>
 
-
-
-        <div class="separator-line separator-primary"></div>
-
-        <div class="separator-line separator-primary"></div>
-
-        <!--     Contact us Section    -->
-        {% include 'sponsor/../assets/contact_us_section.html' %}
-        <!--     End Contact us Section    -->
+    <!--     Contact us Section    -->
+    {% include 'sponsor/../assets/contact_us_section.html' %}
+    <!--     End Contact us Section    -->
 
     </div>
 {% endblock %}
