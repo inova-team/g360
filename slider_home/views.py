@@ -26,7 +26,6 @@ def slider_upload(request):
         }
 
         item_type = data_from_html['item_type']
-        print(data_from_html)
 
         if item_type == 'Evento':
             item.event = Event.objects.get(pk=data_from_html['item_selected'])
@@ -57,8 +56,43 @@ def slider_delete(request, pk):
     return redirect('slider_list')
 
 
-def slider_update(request):
-    return render(request, 'home/home.html')
+def slider_update(request, pk):
+    item = SliderItem.objects.get(pk=pk)
+    events = Event.objects.all()
+    articles = Article.objects.all()
+    choices_items = ['Evento', 'Articulo']
+
+    if request.POST:
+
+        data_from_html = request.POST
+        # print("===========")
+        # print(data_from_html)
+
+        type = {
+            'Evento': 'Event',
+            'Articulo': 'Article'
+        }
+
+        item_type = data_from_html['item_type']
+
+        if item_type == 'Evento':
+            item.event = Event.objects.get(pk=data_from_html['item_selected'])
+
+        elif item_type == 'Articulo':
+            item.article = Article.objects.get(pk=data_from_html['item_selected'])
+
+        item.type_item = type[item_type]
+        item.save()
+
+        return redirect('slider_list')
+
+    context = {
+        'events': events,
+        'articles': articles,
+        'title_page': 'Editar item del Slider',
+        'choices_items': choices_items,
+    }
+    return render(request, 'slider_home/slider_update.html')
 
 
 @login_required(login_url='g360Login')

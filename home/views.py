@@ -31,8 +31,6 @@ def render_home(request):
         'enum_items_slider': enum_items_slider
     }
 
-    print(items_slider[3].article.banner)
-
     return render(request, 'home/home.html', context)
 
 

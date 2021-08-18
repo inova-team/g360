@@ -81,33 +81,23 @@
                                 <td>{{ item.event.description|safe|truncatechars:"200" }}</td>
                                 <td>{{ item.event.responsible }}</td>
                                 <td class="text-center">
-                                    <a href="{% url 'slider_update' item.event.pk %}"
+                                    <a href="{% url 'slider_update' item.pk %}"
                                        class="btn btn-round btn-success btn-icon btn-sm edit"><i
                                             class="far fa-edit"></i></a>
                                     <a href="#" class="btn btn-round btn-danger btn-icon btn-sm"
                                        data-toggle="modal"
-                                       data-target="#confirmationDeleteModal{{ item.event.pk }}"><i
+                                       data-target="#confirmationDeleteModal{{ item.pk }}"><i
                                             class="fas fa-trash"></i></a>
                                 </td>
                         {% endif %}
                             <!-- Modal -->
-                        {% if item.type_item == 'Article' %}
-                            <div class="modal fade" id="confirmationDeleteModal{{ item.event.pk }}" tabindex="-1"
-                        {% endif %}
-                        {% if item.type_item == 'Event' %}
-                            <div class="modal fade" id="confirmationDeleteModal{{ item.article.pk }}" tabindex="-1"
-                        {% endif %}
+                            <div class="modal fade" id="confirmationDeleteModal{{ item.pk }}" tabindex="-1"
                                  role="dialog"
                                  aria-labelledby="confirmationDeleteModal" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            {% if item.type_item == 'Article' %}
-                                                <h5 class="modal-title" id="exampleModalLabel">Quitar Articulo del Slider</h5>
-                                            {% endif %}
-                                            {% if item.type_item == 'Event' %}
-                                                <h5 class="modal-title" id="exampleModalLabel">Quitar Evento del Slider</h5>
-                                            {% endif %}
+                                            <h5 class="modal-title" id="exampleModalLabel">Quitar item del Slider</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -120,14 +110,8 @@
                                             <button type="button" class="btn btn-primary" data-dismiss="modal">
                                                 Cancelar
                                             </button>
-                                            {% if item.type_item == 'Article' %}
-                                                <a href="{% url 'slider_delete' item.article.pk %}"
-                                                   class="btn btn-danger btn-sm">Eliminar</a>
-                                            {% endif %}
-                                            {% if item.type_item == 'Event' %}
-                                                <a href="{% url 'slider_delete' item.event.pk %}"
-                                                   class="btn btn-danger btn-sm">Eliminar</a>
-                                            {% endif %}
+                                            <a href="{% url 'slider_delete' pk=item.pk %}"
+                                               class="btn btn-danger btn-sm">Eliminar</a>
                                         </div>
                                     </div>
                                 </div>

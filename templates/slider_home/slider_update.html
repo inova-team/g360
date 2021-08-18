@@ -1,10 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_intranet/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block extrastyles %}
+    <style>
+
+        {#form {margin: 50px;padding: 20px;}#}
+
+        div > img {
+            background: #eee;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            list-style-type: none;
+            border: 1px solid black;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+    </style>
+
+
+{% endblock %}
+
+{% block panel-header %}
+    <div class="header text-center">
+        <h2 class="title">{{ title_page }}</h2>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+{#                    <h2>Nuevo artículo</h2>#}
+                    <hr>
+                    <form name="event_upload_form" id="event_upload_form" method="post"
+                          enctype="multipart/form-data" onsubmit="return validateArticleUploadForm();">
+                        {% csrf_token %}
+{#                        <div class="form-group">#}
+{#                            <label for="exampleFormControlInput1">Nombre*</label>#}
+{#                            <input type="text" name="name" id="name" class="form-control"#}
+{#                                   placeholder="Nombre del evento" required#}
+{#                            />#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label for="exampleFormControlTextarea1">Descripción*</label>#}
+{#                            <textarea class="form-control" name="description" id="description" rows="6"#}
+{#                                      placeholder="Descripción del evento" required></textarea>#}
+{#                            <div class="min-vh-50">#}
+{#                                <textarea>Next, use our Get Started docs to setup Tiny!</textarea>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Tipo de Item*</label>
+                            <select id="item_type" name="item_type" class="form-control form-control-lg" id="exampleFormControlSelect1"
+                                onchange="list_items_options()">
+                                <option value="0">---------</option>
+                                {% for choice in choices_items %}
+                                    <option value="{{ choice }}">{{ choice }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Item*</label>
+                            <select id="item_selected" name="item_selected" class="form-control form-control-lg"
+                                    id="exampleFormControlSelect1">
+                            </select>
+                        </div>
+
+                        <div class="formulario__mensaje" id="formulario__mensaje">
+                            <p id="message_upload_error" style="display:none;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <b>Error:</b>
+                                Por favor rellena el formulario correctamente.
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="reset" class="btn btn-danger" onclick="cancelArticleUpload()">Cancelar
+                            </button>
+                            &nbsp;
+                            <button type="submit" class="btn btn-success">Guardar</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+{% block extrajs %}
+    <script>
+        $(document).ready(function () {
+            list_items_options();
+        });
+
+        //function redirect_detail_article(id_article) {
+        //    document.location.href = "../../article/article_detail/" + id_article;
+        //}
+
+        function list_items_options() {
+            //console.log("hola")
+            //console.log('dentro de listar articulos')
+            //console.log($("#category_select").val())
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'list_items_options' %}",
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    type_item: $("#item_type").val(),
+                },
+                success: function (response) {
+                    var instance = JSON.parse(response['item']);
+                    var i;
+                    var numero = instance.length;
+                    var data = '';
+
+                    console.log(instance)
+                    console.log(instance.length)
+
+                    data += ('<option value="0">---------</option>')
+
+                    for (i = 0; i < numero; i++) {
+                        data += (
+                            '<option value="' + instance[i]["pk"] + '">' + instance[i].fields.name + '</option>'
+                        )
+                    }
+
+                    $("#item_selected").empty();
+                    $("#item_selected").append(data);
+
+                },
+                error: function (response) {
+                    console.log('Ocurrio un error')
+                    alert(response["responseJSON"]["error"]);
+                }
+            });
+        }
+
+
+    </script>
+
+{#    <script src="{% static 'assets_intranet/lib/tinymce/tinymce.min.js' %}"></script>#}
+{% endblock %}

@@ -1,4 +1,5 @@
 {% load static %}
+
 <br>
 <div class="container" style="max-height: 1100px;width: 1100px;">
     <div class="row justify-content-center">
@@ -22,14 +23,21 @@
                             <div class="carousel-item">
                         {% endif %}
                     {% if item.type_item == 'Article' %}
-                        <img class="d-block" href="https://www.google.com/" src="{{ item.article.banner.url }}" alt="First slide">
+                        <a href="{% url 'article_detail' item.article.pk %}">
+                            <img class="d-block" src="{{ item.article.banner.url }}" alt="First slide"></a>
+                        <div class="carousel-caption d-none d-md-block">
+{#                            <h5>{{ item.article.name }}</h5>#}
+                            <a class="btn btn-instagram" href="{% url 'article_detail' pk=item.article.pk %}"><b>Ver más...</b></a>
+                        </div>
                     {% endif %}
                     {% if item.type_item == 'Event' %}
-                        <img class="d-block" href="https://www.google.com/" src="{{ item.event.banner.url }}" alt="First slide">
+                        <a href="{% url 'event_detail' item.event.pk %}">
+                            <img class="d-block" src="{{ item.event.banner.url }}" alt="First slide"></a>
+                        <div class="carousel-caption d-none d-md-block">
+{#                            <a class="btn btn-instagram"><h5>{{ item.event.name }}</h5></a>#}
+                            <a class="btn btn-instagram" href="{% url 'event_detail' pk=item.event.pk %}"><b>Inscribete aquí!</b></a>
+                        </div>
                     {% endif %}
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Nature, United States</h5>
-                    </div>
                     </div>
                     {% endfor %}
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
