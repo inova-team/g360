@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.template.loader import get_template
 from django.utils import timezone
 
+from article.models import Article
 from event.models import Event
 from alliance.models import Alliance
 from slider_home.models import SliderItem
@@ -20,13 +21,14 @@ def render_home(request):
     items_slider = SliderItem.objects.all()
     num_items = items_slider.count()
     enum_items_slider = [i for i in range(num_items)]
-
+    articles = Article.objects.filter().order_by('-publication_date')[0:3]
     context = {
         'alliances': alliances,
         'title_page': 'Home',
         'media_path': media_path,
         'is_active_home': 'active',
         'events': events,
+        'articles': articles,
         'items_slider': items_slider,
         'enum_items_slider': enum_items_slider
     }

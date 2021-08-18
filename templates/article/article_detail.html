@@ -78,7 +78,7 @@
             </div>
 
 
-            <div class="section section-blog-info">
+           <div class="section section-blog-info">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8 ml-auto mr-auto">
@@ -95,12 +95,57 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h4 class="card-title">{{ article.author }}</h4>
-
+                                        <h4 class="card-title">{{ author.first_name }} {{ author.last_name }}</h4>
+                                        <p class="description">Contacto: {{ author.email }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+
+             <div class="section">
+                <div class="container">
+                    <div class="col-md-12">
+                        <h2 class="title text-center">Ultimos articulos de la categoría</h2>
+                        <br/>
+                        {% for article in list_articles %}
+                            <div class="blogs-1" id="blogs-1">
+                                <div class="row">
+                                    <div class="col-md-10 ml-auto mr-auto">
+                                        <div class="card card-plain card-blog">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="card-image">
+                                                        <img class="img img-raised rounded"
+                                                             src="{{ article.banner.url }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h6 class="category text-info">{{ article.category }}</h6>
+                                                    <h3 class="card-title">
+                                                        <a href={% url "article_detail" pk=article.pk %}>{{ article.name }}</a>
+                                                    </h3>
+                                                    <p class="card-description">
+                                                        {{ article.description|truncatechars:"150" }}
+                                                        <a href={% url "article_detail" pk=article.pk %}><b>Leer más</b></a>
+                                                    </p>
+                                                    <p class="author">
+                                                        por
+                                                        <span>
+                                                            <b>{{ article.author }},
+                                                                <time class="timeago"
+                                                                      datetime="{{ article.publication_date|date:'c' }}"></time></b>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
