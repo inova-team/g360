@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'alliance',
     'sponsor',
     'slider_home',
-    'tinymce',
 ]
 
 MIDDLEWARE = [
