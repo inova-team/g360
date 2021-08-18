@@ -8,6 +8,8 @@ from django.utils import timezone
 
 from event.models import Event
 from alliance.models import Alliance
+from slider_home.models import SliderItem
+
 
 def render_home(request):
     media_path = '/media/'
@@ -15,13 +17,22 @@ def render_home(request):
     date_now = str(timezone.now())
     date_filter = date_now[:19]
     events = Event.objects.filter(date_event__lt=date_filter).order_by('-date_event')[0:3]
+    items_slider = SliderItem.objects.all()
+    num_items = items_slider.count()
+    enum_items_slider = [i for i in range(num_items)]
+
     context = {
         'alliances': alliances,
         'title_page': 'Home',
         'media_path': media_path,
         'is_active_home': 'active',
-        'events': events
+        'events': events,
+        'items_slider': items_slider,
+        'enum_items_slider': enum_items_slider
     }
+
+    print(items_slider[3].article.banner)
+
     return render(request, 'home/home.html', context)
 
 

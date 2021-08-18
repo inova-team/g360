@@ -18,6 +18,6 @@ class SliderItem(models.Model):
 
     def __str__(self):
         if self.event is None:
-            return self.event.name
-        else:
             return self.article.name
+        else:
+            return self.event.name

@@ -18,6 +18,19 @@
             }
         }
 
+        .carousel-item img {
+            width: 100%;
+            height: 25rem;
+        }
+
+        @supports (object-fit: cover) {
+            .carousel-item img {
+                height: 25rem;
+                object-fit: cover;
+                object-position: center center;
+            }
+        }
+
     </style>
 {% endblock %}
 {% block body %}
@@ -33,7 +46,7 @@
 {#        {% include 'home/components/who_we_are_section.html' %}#}
 {#        <!--     End Who we are Section    -->#}
 
-        <div class="separator-line separator-primary"></div>
+{#        <div class="separator-line separator-primary"></div>#}
 
         <!--Sponsor Section-->
         {% include 'home/components/slider_section_sponsor.html' %}
