@@ -61,8 +61,65 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-1 justify-content-center">
+                            <label for="category_select">Buscar:</label>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <select id="author_select" name="author_select" class="form-control form-control-lg"
+                                        onchange="articles_list_category()">
+                                    <option value="0">---------</option>
+                                    {% for author in users %}
+                                        <option value="{{ author.pk }}">{{ author.first_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
-                  {% comment %}  <div class="row mt-3">
+                    <div class="row">
+                        <div class="col-1 justify-content-center">
+                            <label for="category_select">Titulo:</label>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <div class="input-group ">
+                                    <input type="text" id="filter_text" class="form-control" placeholder=""
+                                           aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                  </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-1 justify-content-center">
+                            <label for="category_select">Inicio:</label>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input type="text" id="bottomDate" class="form-control datepicker">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-1 justify-content-center">
+                            <label for="category_select">Fin:</label>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input type="text" id="topDate" class="form-control datepicker">
+                            </div>
+                        </div>
+                    </div>
+
+                    {% comment %}  <div class="row mt-3">
                         {% for article in articles %}
                             <div class="col-md-4">
                                 <div class="card card-plain card-blog">
@@ -104,10 +161,49 @@
     <script>
         $(document).ready(function () {
             articles_list_category();
+            $('#filter_text').keypress(function (e) {
+                if (e.keyCode == 13)
+                    articles_list_category();
+            });
+
+            $('#buttonSearch').onclick(function (e) {
+                articles_list_category();
+            });
+
         });
 
         function redirect_detail_article(id_article) {
             document.location.href = "../../article/article_detail/" + id_article;
+        }
+
+        function print_results(instance) {
+            var i;
+            var numero = instance.length;
+            var data = '';
+            for (i = 0; i < numero; i++) {
+                data += (
+                    '    <div class="col-md-4">' +
+                    '        <div class="card card-plain card-blog">' +
+                    '            <div class="card-image">' +
+                    '                    <img class="img rounded img-raised" onclick="redirect_detail_article(' + instance[i]["pk"] + ')" src=' + {{ media_path }} +instance[i]["fields"].banner + '/>' +
+                    '            </div>' +
+                    '            <div class="card-body">' +
+                    '                <h4 class="card-title" )>' + instance[i]["fields"].name +
+                    '                </h4>' +
+                    '                <p class="card-description">' + instance[i]["fields"].description.substr(0, 200) + '...' +
+                    '                <buttom> ' +
+                    '                </p>' +
+                    '            </div>' +
+                    '            <div class="card-footer">' +
+                    '                <button class="btn btn-primary" onclick="redirect_detail_article(' + instance[i]["pk"] + ')"> Ver mas</button>' +
+                    '            </div>' +
+                    '        </div>' +
+                    '    </div>'
+                )
+            }
+            $("#articles_list").empty();
+            $("#articles_list").append(data);
+            $("#filter_text").val('');
         }
 
         function articles_list_category() {
@@ -119,38 +215,14 @@
                 data: {
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                     category_id: $("#category_select").val(),
+                    author_id: $("#author_select").val(),
+                    filter_text: $("#filter_text").val()
                 },
                 success: function (response) {
                     var instance = JSON.parse(response['articles']);
                     console.log(instance);
                     console.log({{ media_path }})
-                    var i;
-                    var numero = instance.length;
-                    var data = '';
-
-                    for (i = 0; i < numero; i++) {
-                        data += (
-                            '    <div class="col-md-4">' +
-                            '        <div class="card card-plain card-blog">' +
-                            '            <div class="card-image">' +
-                            '                    <img class="img rounded img-raised" onclick="redirect_detail_article(' + instance[i]["pk"] + ')" src=' + {{ media_path }} +instance[i]["fields"].banner + '/>' +
-                            '            </div>' +
-                            '            <div class="card-body">' +
-                            '                <h4 class="card-title" )>' + instance[i]["fields"].name +
-                            '                </h4>' +
-                            '                <p class="card-description">' + instance[i]["fields"].description.substr(0, 200) + '...' +
-                            '                <buttom> ' +
-                            '                </p>' +
-                            '            </div>' +
-                            '            <div class="card-footer">' +
-                            '                <button class="btn btn-primary" onclick="redirect_detail_article(' + instance[i]["pk"] + ')"> Ver mas</button>' +
-                            '            </div>' +
-                            '        </div>' +
-                            '    </div>'
-                        )
-                    }
-                    $("#articles_list").empty();
-                    $("#articles_list").append(data);
+                    print_results(instance);
                 },
                 error: function (response) {
                     console.log('Ocurrio un error')

@@ -62,9 +62,11 @@ def article_list(request):
 def article_repository(request):
     categories = Category.objects.all()
     articles = Article.objects.all()
+    users = User.objects.all()
     media_path = '/media/'
     context = {
         'articles': articles,
+        'users': users,
         'categories': categories,
         'media_path': media_path,
         'title_page': 'Lista de Artículos',
@@ -143,18 +145,24 @@ def article_list_search(request, pk):
 
 def articles_list_category(request):
     id_category = request.POST['category_id']
+    id_author= request.POST['author_id']
+    filter_text = request.POST['filter_text']
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-    print(id_category)
+    print(request.POST)
 
     if (id_category == '0'):
         articles = Article.objects.all()
-        ser_instance = serializers.serialize('json', articles)
         print("Todos")
     else:
         articles = Article.objects.filter(category_id=id_category).order_by('-publication_date')
-        ser_instance = serializers.serialize('json', articles)
         print("por categoria")
+    if(id_author != '0'):
+        articles = articles.filter(author_id=id_author)
+    if(len(filter_text)>0):
+        articles = articles.filter(name__contains=filter_text)
 
+
+    ser_instance = serializers.serialize('json', articles)
     print(ser_instance)
 
     return JsonResponse({"articles": ser_instance}, status=200)
