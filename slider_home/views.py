@@ -60,7 +60,7 @@ def slider_update(request, pk):
     item = SliderItem.objects.get(pk=pk)
     events = Event.objects.all()
     articles = Article.objects.all()
-    choices_items = ['Evento', 'Articulo']
+    choices_items = [('Event','Evento'), ('Article','Articulo')]
 
     if request.POST:
 
@@ -91,8 +91,10 @@ def slider_update(request, pk):
         'articles': articles,
         'title_page': 'Editar item del Slider',
         'choices_items': choices_items,
+        'item': item,
     }
-    return render(request, 'slider_home/slider_update.html')
+
+    return render(request, 'slider_home/slider_update.html', context)
 
 
 @login_required(login_url='g360Login')

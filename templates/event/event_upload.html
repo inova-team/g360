@@ -120,6 +120,15 @@
 
 {% endblock %}
 {% block extrajs %}
+
+    <script src="{% static 'assets_intranet\lib\tinymce\tinymce.js' %}"></script>
+
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
+
     <script>
 
         const inputImage = document.getElementById('image_uploads');
@@ -180,9 +189,10 @@
 
             let name = document.forms["event_upload_form"]["name"].value;
             let description = document.forms["event_upload_form"]["description"].value;
+            let description2 = document.forms["event_upload_form"]["mytextarea"].value;
             let responsible = document.forms["event_upload_form"]["responsible_select"].value;
 
-            if (name.trim().length != 0 && description.trim().length != 0 && responsible != 0 && validFileTypeImage()) {
+            if (name.trim().length != 0 && responsible != 0 && validFileTypeImage()) {
                 correct = true;
                 p_error.style.display = "none";
             } else {
@@ -196,14 +206,7 @@
             window.location.href = "{% url 'event_list' %}"
         }
 
-    </script>
 
-    <script src="{% static 'assets_intranet\lib\tinymce\tinymce.js' %}"></script>
-
-    <script>
-      tinymce.init({
-        selector: '#mytextarea'
-      });
     </script>
 
 {% endblock %}

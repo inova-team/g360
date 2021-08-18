@@ -59,12 +59,12 @@
                                 <td>{{ item.article.description|safe|truncatechars:"200" }}</td>
                                 <td>{{ item.article.responsible }}</td>
                                 <td class="text-center">
-                                    <a href="{% url 'slider_update' item.article.pk %}"
-                                       class="btn btn-round btn-success btn-icon btn-sm edit"><i
-                                            class="far fa-edit"></i></a>
+{#                                    <a href="{% url 'slider_update' item.article.pk %}"#}
+{#                                       class="btn btn-round btn-success btn-icon btn-sm edit"><i#}
+{#                                            class="far fa-edit"></i></a>#}
                                     <a href="#" class="btn btn-round btn-danger btn-icon btn-sm"
                                        data-toggle="modal"
-                                       data-target="#confirmationDeleteModal{{ item.article.pk }}"><i
+                                       data-target="#confirmationDeleteModal{{ item.pk}}"><i
                                             class="fas fa-trash"></i></a>
                                 </td>
                         {% endif %}
@@ -81,9 +81,9 @@
                                 <td>{{ item.event.description|safe|truncatechars:"200" }}</td>
                                 <td>{{ item.event.responsible }}</td>
                                 <td class="text-center">
-                                    <a href="{% url 'slider_update' item.pk %}"
-                                       class="btn btn-round btn-success btn-icon btn-sm edit"><i
-                                            class="far fa-edit"></i></a>
+{#                                    <a href="{% url 'slider_update' item.pk %}"#}
+{#                                       class="btn btn-round btn-success btn-icon btn-sm edit"><i#}
+{#                                            class="far fa-edit"></i></a>#}
                                     <a href="#" class="btn btn-round btn-danger btn-icon btn-sm"
                                        data-toggle="modal"
                                        data-target="#confirmationDeleteModal{{ item.pk }}"><i

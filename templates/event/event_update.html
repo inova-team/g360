@@ -50,8 +50,10 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Descripción*</label>
-                            <textarea class="form-control" name="description" id="description" rows="6"
-                                      placeholder="Descripción del artículo" required>{{ event.description }}</textarea>
+                            <div class="min-vh-50">
+                                <input id="mytextarea" name="description" value="{{ event.description|safe }}"
+                                          class="tinymce d-none"/>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Responsable*</label>
@@ -129,6 +131,15 @@
 
 {% endblock %}
 {% block extrajs %}
+
+    <script src="{% static 'assets_intranet\lib\tinymce\tinymce.js' %}"></script>
+
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
+
     <script>
 
         const inputImage = document.getElementById('image_uploads');
@@ -202,7 +213,7 @@
                 }
             }
 
-            if (name.trim().length != 0 && description.trim().length != 0 && responsible != 0 && imagesOk) {
+            if (name.trim().length != 0 && responsible != 0 && imagesOk) {
                 correct = true;
                 p_error.style.display = "none";
             } else {

@@ -41,7 +41,7 @@
 {#                    <h2>Nuevo artículo</h2>#}
                     <hr>
                     <form name="event_upload_form" id="event_upload_form" method="post"
-                          enctype="multipart/form-data" onsubmit="return validateArticleUploadForm();">
+                          enctype="multipart/form-data">
                         {% csrf_token %}
 {#                        <div class="form-group">#}
 {#                            <label for="exampleFormControlInput1">Nombre*</label>#}
@@ -61,9 +61,13 @@
                             <label for="exampleFormControlSelect1">Tipo de Item*</label>
                             <select id="item_type" name="item_type" class="form-control form-control-lg" id="exampleFormControlSelect1"
                                 onchange="list_items_options()">
-                                <option value="0">---------</option>
-                                {% for choice in choices_items %}
-                                    <option value="{{ choice }}">{{ choice }}</option>
+                                <option value="">---------</option>
+                                {% for choice_eng, choice_esp in choices_items %}
+                                    {% if item.type_item == choice_eng %}
+                                        <option value="{{ choice_eng }}" selected>{{ choice_esp }}</option>
+                                    {% else %}
+                                        <option value="{{ choice_eng }}">{{ choice_esp }}</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
@@ -147,8 +151,13 @@
             });
         }
 
+        function cancelArticleUpload() {
+            window.location.href = "{% url 'slider_list' %}"
+        }
+
 
     </script>
+
 
 {#    <script src="{% static 'assets_intranet/lib/tinymce/tinymce.min.js' %}"></script>#}
 {% endblock %}
