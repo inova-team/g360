@@ -3,15 +3,25 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from authentication.models import User
 from alliance.models import Alliance
+import random
 
 def alliance_detail_user(request, pk):
     alliance = Alliance.objects.filter(pk=pk).exists()
+    media_path = '/media/'
+    other_sponsors = Alliance.objects.filter(is_active=1).exclude(pk=pk)
+    random_items = {}
+    if (len(other_sponsors) > 1):
+        random_items = random.sample(list(other_sponsors), 2)
+    if (len(other_sponsors) == 1):
+        random_items = other_sponsors
     if alliance:
         alliance = Alliance.objects.get(pk=pk)
         context = {
             'alliance': alliance,
             'is_active_alliances': 'active',
             'title_page': alliance.name,
+            'media_path': media_path,
+            'others': random_items
         }
         return render(request, "alliance/alliance_detail_user.html", context)
     else:
