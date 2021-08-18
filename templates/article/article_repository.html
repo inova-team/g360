@@ -63,7 +63,7 @@
                     </div>
                     <div class="row">
                         <div class="col-1 justify-content-center">
-                            <label for="category_select">Buscar:</label>
+                            <label for="category_select">Autor:</label>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
@@ -170,6 +170,14 @@
                 articles_list_category();
             });
 
+            $('#topDate').on('dp.change', function (e) {
+                articles_list_category();
+            });
+
+            $('#bottomDate').on('dp.change', function (e) {
+                articles_list_category();
+            });
+
         });
 
         function redirect_detail_article(id_article) {
@@ -216,7 +224,9 @@
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                     category_id: $("#category_select").val(),
                     author_id: $("#author_select").val(),
-                    filter_text: $("#filter_text").val()
+                    filter_text: $("#filter_text").val(),
+                    bottomDate: $("#bottomDate").val(),
+                    topDate: $("#topDate").val()
                 },
                 success: function (response) {
                     var instance = JSON.parse(response['articles']);

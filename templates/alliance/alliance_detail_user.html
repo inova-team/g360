@@ -22,19 +22,17 @@
             </div>
         </div>
         <div class="container">
-            <div class="row">
-                <div class="col-md-5 ml-auto mr-auto d-flex mt-5">
+            <div class="row mt-5">
+                <div class="col-md-5 ml-auto mr-auto d-flex">
                     <div class="align-self-center">
-                        <p class="description">{{ alliance.description }}
-                            <br>
-                            <br>
-                        </p>
+                        Descripción
+                        <p>{{ alliance.description }}</p>
                     </div>
                 </div>
                 <div class="col-md-5 ml-auto mr-auto">
-                    <div class="info info-horizontal mt-5 p-0">
+                    <div class="info info-horizontal p-0">
                         {% if alliance.website_link %}
-                            <a href="{{ alliance.website_link }}">
+                            <a href="{{ alliance.website_link }}" target="_blank">
                                 <div class="icon icon-primary" style="color: #3b5998">
                                     <i class="now-ui-icons location_pin"></i>
                                 </div>
@@ -52,7 +50,7 @@
                                 <ul class="social-buttons p-0 list-group list-group-horizontal">
                                     {% if alliance.twitter_link %}
                                         <li>
-                                            <a href="{{ alliance.twitter_link }}"
+                                            <a href="{{ alliance.twitter_link }}" target="_blank"
                                                class="btn btn-icon btn-neutral btn-twitter btn-lg list-group-item m-0">
                                                 <i class="fab fa-twitter"></i>
                                             </a>
@@ -60,7 +58,7 @@
                                     {% endif %}
                                     {% if alliance.fb_link %}
                                         <li>
-                                            <a href="{{ alliance.fb_link }}"
+                                            <a href="{{ alliance.fb_link }}" target="_blank"
                                                class="btn btn-icon btn-neutral btn-facebook btn-lg list-group-item m-0">
                                                 <i class="fab fa-facebook-square"></i>
                                             </a>
@@ -68,7 +66,7 @@
                                     {% endif %}
                                     {% if alliance.instagram_link %}
                                         <li>
-                                            <a href="{{ alliance.instagram_link }}"
+                                            <a href="{{ alliance.instagram_link }}" target="_blank"
                                                class="btn btn-icon btn-neutral btn-dribbble btn-lg list-group-item m-0">
                                                 <i class="fab fa-instagram"></i>
                                             </a>

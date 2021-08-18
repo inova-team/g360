@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from .models import Article
 from .models import Category
 from django.contrib.auth.models import User
-
+from datetime import datetime
 
 def article_upload(request):
     users = User.objects.all()
@@ -144,6 +144,8 @@ def articles_list_category(request):
     id_category = request.POST['category_id']
     id_author= request.POST['author_id']
     filter_text = request.POST['filter_text']
+    bottomDateStr = request.POST['bottomDate']
+    topDateStr = request.POST['topDate']
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     print(request.POST)
 
@@ -158,8 +160,22 @@ def articles_list_category(request):
     if(len(filter_text)>0):
         articles = articles.filter(name__contains=filter_text)
 
+    if(bottomDateStr!='' and topDateStr==''):
+        bottomDate = datetime.strptime(bottomDateStr+' 0:00', '%m/%d/%Y %H:%M')
+        topDate = datetime.strptime('08/19/2107 23:59', '%m/%d/%Y %H:%M')
+        articles = articles.filter(publication_date__range=[bottomDate, topDate])
+
+    if(bottomDateStr=='' and topDateStr!=''):
+        bottomDate = datetime.strptime('08/19/1910 0:00', '%m/%d/%Y %H:%M')
+        topDate = datetime.strptime(topDateStr+' 23:59', '%m/%d/%Y %H:%M')
+        articles = articles.filter(publication_date__range=[bottomDate,topDate])
+
+    if (bottomDateStr != '' and topDateStr != ''):
+        bottomDate = datetime.strptime(bottomDateStr+' 0:00', '%m/%d/%Y %H:%M')
+        topDate = datetime.strptime(topDateStr+' 23:59', '%m/%d/%Y %H:%M')
+        articles = articles.filter(publication_date__range=[bottomDate, topDate])
 
     ser_instance = serializers.serialize('json', articles)
-    print(ser_instance)
+    # print(ser_instance)
 
     return JsonResponse({"articles": ser_instance}, status=200)

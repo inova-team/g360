@@ -1,0 +1,40 @@
+{% load static %}
+
+<div class="blogs-3">
+    <div class="container">
+        <div class="section">
+            <h3 class="title text-center">Artículos más recientes</h3>
+            <br/>
+            <div class="row mt-3">
+                {% for article in articles %}
+                    <div class="col-md-4">
+                        <div class="card card-plain card-blog">
+                            <div class="card-image">
+                                <a href="{% url 'article_detail' article.pk %}">
+                                    <img class="img rounded img-raised" src={{ article.banner.url }}/>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title"> {{ article.name }}
+                                    <a href="{% url 'article_detail' article.pk %}"></a>
+                                </h4>
+                                <h6 class="category text-success">
+                                    {{ article.category }}
+                                </h6>
+                                <p class="card-description">{{ article.description|safe|truncatechars:"180" }}
+                                    <a href="{% url 'article_detail' article.pk %}"> Leer más </a>
+                                <div class="author">
+                                    <span>{{ article.author }}</span>
+                                </div>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary"> Ver mas</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
