@@ -88,9 +88,9 @@
                                     <input type="text" id="filter_text" class="form-control" placeholder=""
                                            aria-label="Recipient's username" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
-                                        <div class="input-group-text">
-                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                  </div>
+                                        <div class="input-group-text btn m-0" id="filterSearch">
+                                            <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@
                     articles_list_category();
             });
 
-            $('#buttonSearch').onclick(function (e) {
+            $('#filterSearch').click(function (e) {
                 articles_list_category();
             });
 
