@@ -55,7 +55,9 @@
             <div class="brand-carousel owl-carousel">
                 {% for sponsor in sponsors %}
                     <div class="single-logo">
-                        <img src="{{ media_path }}{{ sponsor.banner }}">
+                        <a href="{% url 'sponsor_detail_user' sponsor.pk %}">
+                            <img src="{{ media_path }}{{ sponsor.banner }}">
+                        </a>
                     </div>
                 {% endfor %}
             </div>
