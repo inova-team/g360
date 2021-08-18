@@ -111,9 +111,6 @@ def article_update(request, pk):
 
 
 def article_detail(request, pk):
-    print("=======================")
-    print(pk)
-    print("=======================")
     article = Article.objects.get(pk=pk)
     id_category = article.category_id
     list_articles = Article.objects.filter(category_id=id_category).exclude(pk=pk).order_by('-publication_date')[
