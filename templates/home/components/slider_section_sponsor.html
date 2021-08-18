@@ -31,7 +31,7 @@
         background-color: #000 !important;
     }
 
-    {% comment %} #sponsor-carousel{
+    {% comment %} #alliance-carousel{
          background-color: #333;
          padding-top: 2px;
          padding-bottom: 40px;
@@ -49,14 +49,14 @@
      }{% endcomment %}
 
 </style>
-{% if sponsors %}
-    <div class="container-fluid" id="sponsor-carousel">
+{% if alliances %}
+    <div class="container-fluid" id="alliance-carousel">
         <div class="container">
             <div class="brand-carousel owl-carousel">
-                {% for sponsor in sponsors %}
+                {% for alliance in alliances %}
                     <div class="single-logo">
-                        <a href="{% url 'sponsor_detail_user' sponsor.pk %}">
-                            <img src="{{ media_path }}{{ sponsor.banner }}">
+                        <a href="{% url 'alliance_detail_user' alliance.pk %}">
+                            <img src="{{ media_path }}{{ alliance.banner }}">
                         </a>
                     </div>
                 {% endfor %}

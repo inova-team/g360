@@ -7,17 +7,16 @@ from django.template.loader import get_template
 from django.utils import timezone
 
 from event.models import Event
-from sponsor.models import Sponsor
-
+from alliance.models import Alliance
 
 def render_home(request):
     media_path = '/media/'
-    sponsors = Sponsor.objects.all()
+    alliances = Alliance.objects.all()
     date_now = str(timezone.now())
     date_filter = date_now[:19]
     events = Event.objects.filter(date_event__lt=date_filter).order_by('-date_event')[0:3]
     context = {
-        'sponsors': sponsors,
+        'alliances': alliances,
         'title_page': 'Home',
         'media_path': media_path,
         'is_active_home': 'active',
