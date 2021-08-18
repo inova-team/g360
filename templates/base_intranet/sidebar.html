@@ -20,7 +20,7 @@
     <div class="sidebar-wrapper" id="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="{% static '/img/james.jpg' %}"/>
+                <img src="{% static 'assets_intranet/img/james.jpg' %}"/>
             </div>
             <div class="info">
                 <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -90,7 +90,7 @@
                         <span class="sidebar-normal"> Crear </span>
                     </a>
                 </li>
-                <li class="{{ is_active_event_list   }}">
+                <li class="{{ is_active_event_list }}">
                     <a href="{% url 'event_list' %}">
                         <span class="sidebar-mini-icon">L</span>
                         <span class="sidebar-normal"> Listar </span>
@@ -221,7 +221,7 @@
                         </p>
                     </a>
                     <div class="collapse show" id="word">
-            {% else %}
+                        {% else %}
                 <li>
                 <a data-toggle="collapse" href="#word">
                     <i class="now-ui-icons education_atom"></i>
@@ -249,7 +249,7 @@
             </ul>
 
 
-        {% if is_active_sponsor_upload == 'active' or is_active_sponsor_list == 'active' %}
+            {% if is_active_sponsor_upload == 'active' or is_active_sponsor_list == 'active' %}
                 <li class="active">
                     <a data-toggle="collapse" href="#sponsors">
                         <i class="now-ui-icons business_briefcase-24"></i>
@@ -286,7 +286,7 @@
             </li>
 
 
-        {% if is_active_alliance_upload == 'active' or is_active_alliance_list == 'active' %}
+            {% if is_active_alliance_upload == 'active' or is_active_alliance_list == 'active' %}
                 <li class="active">
                     <a data-toggle="collapse" href="#alliances">
                         <i class="now-ui-icons objects_diamond"></i>
@@ -314,6 +314,43 @@
                 </li>
                 <li class="{{ is_active_alliance_list }}">
                     <a href="{% url 'alliance_list' %}">
+                        <span class="sidebar-mini-icon">L</span>
+                        <span class="sidebar-normal"> Listar </span>
+                    </a>
+                </li>
+            </ul>
+            </div>
+            </li>
+
+            {% if is_active_slider_upload == 'active' or is_active_slider_list == 'active' %}
+                <li class="active">
+                    <a data-toggle="collapse" href="#slider">
+                        <i class="now-ui-icons design_image"></i>
+                        <p>
+                            Slider <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse show" id="slider">
+                        {% else %}
+                <li>
+                <a data-toggle="collapse" href="#slider">
+                    <i class="now-ui-icons design_image"></i>
+                    <p>
+                        Slider <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="slider">
+            {% endif %}
+
+            <ul class="nav">
+                <li class="{{ is_active_slider_upload }}">
+                    <a href="{% url 'slider_upload' %}">
+                        <span class="sidebar-mini-icon">C</span>
+                        <span class="sidebar-normal"> Crear </span>
+                    </a>
+                </li>
+                <li class="{{ is_active_slider_list }}">
+                    <a href="{% url 'slider_list' %}">
                         <span class="sidebar-mini-icon">L</span>
                         <span class="sidebar-normal"> Listar </span>
                     </a>

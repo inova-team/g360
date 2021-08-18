@@ -59,7 +59,7 @@
                                                 <a href="{% url 'event_detail' event.pk %}">{{ event.name|truncatechars:"40" }}</a>
                                             </h3>
                                             <p class="card-description">
-                                                {{ event.description|truncatechars:"180" }}
+                                                {{ event.description|safe|truncatechars:"180" }}
                                                 <a href="{% url 'event_detail' event.pk %}"> Read More </a>
                                             </p>
                                             <div class="author">
@@ -112,41 +112,66 @@
 {% endblock %}
 
 {% block extrajs %}
+
     <script>
         $(document).ready(function () {
-            $("#alert_success").hide();
-            $("#alert_danger").hide();
-            $("time.timeago").timeago();
-
-            $('form').on('submit', function (e) {
-                e.preventDefault();
-                let parameters = $(this).serializeArray();
-                console.log(parameters);
-                $.ajax({
-                    url: '{% url 'contact_us' %}',
-                    type: 'POST',
-                    data: parameters,
-                    dataType: 'json'
-                }).done(function (data) {
-                    //si no hay error
-                    if (!data.hasOwnProperty('error')) {
-                        $("#alert_success").text(data['exito']);
-                        $("#alert_success").fadeTo(2000, 500).slideUp(500, function () {
-                            $("#alert_success").slideUp(500);
-                        });
-                        $('form')[0].reset();
-                        return false;
-                    }
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    $("#alert_success").text(textStatus + ': ' + errorThrown);
-                    $("#alert_danger").fadeTo(2000, 500).slideUp(500, function () {
-                        $("#alert_danger").slideUp(500);
-                    });
-                }).always(function (data) {
-
-                })
-            })
+            articles_list_category();
         });
+
+        function redirect_detail_article(id_article) {
+            document.location.href = "../../article/article_detail/" + id_article;
+        }
+
+        function articles_list_category() {
+            console.log('dentro de listar articulos')
+            console.log($("#category_select").val())
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'articles_list_category' %}",
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    category_id: $("#category_select").val(),
+                },
+                success: function (response) {
+                    var instance = JSON.parse(response['articles']);
+                    console.log(instance);
+                    console.log({{ media_path }})
+                    var i;
+                    var numero = instance.length;
+                    var data = '';
+
+                    for (i = 0; i < numero; i++) {
+                        data += (
+                            '    <div class="col-md-4">' +
+                            '        <div class="card card-plain card-blog">' +
+                            '            <div class="card-image">' +
+                            '                    <img class="img rounded img-raised" onclick="redirect_detail_article(' + instance[i]["pk"] + ')" src=' + {{ media_path }} +instance[i]["fields"].banner + '/>' +
+                            '            </div>' +
+                            '            <div class="card-body">' +
+                            '                <h4 class="card-title" )>' + instance[i]["fields"].name +
+                            '                </h4>' +
+                            '                <p class="card-description">' + instance[i]["fields"].description.substr(0, 200) + '...' +
+                            '                <buttom> ' +
+                            '                </p>' +
+                            '            </div>' +
+                            '            <div class="card-footer">' +
+                            '                <button class="btn btn-primary" onclick="redirect_detail_article(' + instance[i]["pk"] + ')"> Ver mas</button>' +
+                            '            </div>' +
+                            '        </div>' +
+                            '    </div>'
+                        )
+                    }
+                    $("#articles_list").empty();
+                    $("#articles_list").append(data);
+                },
+                error: function (response) {
+                    console.log('Ocurrio un error')
+                    alert(response["responseJSON"]["error"]);
+                }
+            });
+        }
+
+
     </script>
 
 {% endblock %}

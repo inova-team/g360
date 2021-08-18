@@ -55,7 +55,7 @@
                                 {% endif %}
                             </td>
                             <td>{{ event.name|truncatechars:"100" }}</td>
-                            <td>{{ event.description|truncatechars:"200" }}</td>
+                            <td>{{ event.description|safe|truncatechars:"200" }}</td>
                             <td>{{ event.responsible }}</td>
                             <td class="text-center">
                                 <a href="{% url 'event_update' event.pk %}"

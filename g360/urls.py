@@ -28,6 +28,7 @@ urlpatterns = [
     path('article/', include('article.urls')),
     path('category_article/', include('category_article.urls')),
     path('event/', include('event.urls')),
+    path('slider_home/', include('slider_home.urls')),
 ]
 
 if settings.DEBUG:

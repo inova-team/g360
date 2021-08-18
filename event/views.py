@@ -17,7 +17,7 @@ def event_upload(request):
         data_from_html = request.POST
 
         event.name = data_from_html['name']
-        event.description = data_from_html['description']
+        event.description = data_from_html['mytextarea']
 
         if data_from_html['responsible_select'] != 0:
             event.responsible = Staff.objects.get(id=data_from_html['responsible_select'])

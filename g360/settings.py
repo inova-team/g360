@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'dictionary',
     'alliance',
     'sponsor',
-    # 'tinymce',
+    'slider_home',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
