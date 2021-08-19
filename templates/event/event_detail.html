@@ -7,6 +7,24 @@
 
     <style>
 
+        .whatsapp {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            z-index: 100;
+        }
+
+        .whatsapp-icon {
+            margin-top: 13px;
+        }
+
     </style>
 
     <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=60bc22d1c6f9d70011f1a021&product=inline-share-buttons' async='async'></script>
@@ -28,6 +46,8 @@
                  style="background-image: url({{ event.banner.url }});">
             </div>
 
+            <a href="{{ event.link_whatsapp_group }}"
+               class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
 
             <div class="content-center">
                 <div class="row">

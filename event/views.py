@@ -29,6 +29,7 @@ def event_upload(request):
         event.user_register = Staff.objects.get(user_id=str(id_current_user))
         event.user_last_update = Staff.objects.get(user_id=str(id_current_user))
         event.banner = request.FILES.get('image_uploads')
+        event.link_whatsapp_group = data_from_html['url_wsp_group']
         event.save()
         return redirect('event_list')
 
@@ -75,6 +76,7 @@ def event_update(request, pk):
         event.link_form = data_from_html['url_form']
         id_current_user = request.user.pk
         event.user_last_update = Staff.objects.get(user_id=str(id_current_user))
+        event.link_whatsapp_group = data_from_html['url_wsp_group']
 
         if request.FILES.get('image_uploads'):
             event.banner.delete()
