@@ -61,6 +61,11 @@ def sponsor_upload(request):
         sponsor.description = request.POST.get('description')
         sponsor.banner = request.FILES.get('image_uploads')
         sponsor.type = request.POST.get('type')
+        appear_home = request.POST.get('appear_home')
+        if(appear_home =='on'):
+            sponsor.appear_home = True
+        else:
+            sponsor.appear_home = False
 
         if 'fb_link' in request.POST:
             sponsor.fb_link = request.POST.get('fb_link')
@@ -100,6 +105,12 @@ def sponsor_update(request, pk):
         sponsor.instagram_link = request.POST.get('instagram_link')
         sponsor.twitter_link = request.POST.get('twitter_link')
         sponsor.website_link = request.POST.get('website_link')
+
+        appear_home = request.POST.get('appear_home')
+        if (appear_home == 'on'):
+            sponsor.appear_home = True
+        else:
+            sponsor.appear_home = False
 
         if request.FILES.get('image_uploads'):
             sponsor.banner.delete()

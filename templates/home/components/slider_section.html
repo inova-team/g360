@@ -2,8 +2,17 @@
 
 <br>
 <div class="container" style="max-height: 1100px;width: 1100px;">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-12">
+    <div class="row">
+        <div class="col-2 ">
+            {% for sponsor in sponsors %}
+                <div class="single-logo">
+                    <a href="{% url 'sponsor_detail_user' sponsor.pk %}">
+                        <img src="{{ media_path }}{{ sponsor.banner }}">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-8">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
                 <ol class="carousel-indicators">
                     {% for enum in enum_items_slider %}
@@ -26,16 +35,18 @@
                         <a href="{% url 'article_detail' item.article.pk %}">
                             <img class="d-block" src="{{ item.article.banner.url }}" alt="First slide"></a>
                         <div class="carousel-caption d-none d-md-block">
-{#                            <h5>{{ item.article.name }}</h5>#}
-                            <a class="btn btn-instagram" href="{% url 'article_detail' pk=item.article.pk %}"><b>Ver más...</b></a>
+                            {#                            <h5>{{ item.article.name }}</h5>#}
+                            <a class="btn btn-instagram" href="{% url 'article_detail' pk=item.article.pk %}"><b>Ver
+                                más...</b></a>
                         </div>
                     {% endif %}
                     {% if item.type_item == 'Event' %}
                         <a href="{% url 'event_detail' item.event.pk %}">
                             <img class="d-block" src="{{ item.event.banner.url }}" alt="First slide"></a>
                         <div class="carousel-caption d-none d-md-block">
-{#                            <a class="btn btn-instagram"><h5>{{ item.event.name }}</h5></a>#}
-                            <a class="btn btn-instagram" href="{% url 'event_detail' pk=item.event.pk %}"><b>Inscribete aquí!</b></a>
+                            {#                            <a class="btn btn-instagram"><h5>{{ item.event.name }}</h5></a>#}
+                            <a class="btn btn-instagram" href="{% url 'event_detail' pk=item.event.pk %}"><b>Inscribete
+                                aquí!</b></a>
                         </div>
                     {% endif %}
                     </div>
@@ -46,9 +57,17 @@
                     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                         <i class="now-ui-icons arrows-1_minimal-right"></i>
                     </a>
-                    </div>
                 </div>
             </div>
+        </div>
+        <div class="col-2">
+            {% for sponsor in sponsors %}
+                <div class="single-logo">
+                    <a href="{% url 'sponsor_detail_user' sponsor.pk %}">
+                        <img src="{{ media_path }}{{ sponsor.banner }}">
+                    </a>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>

@@ -10,11 +10,13 @@ from article.models import Article
 from event.models import Event
 from alliance.models import Alliance
 from slider_home.models import SliderItem
+from sponsor.models import Sponsor
 
 
 def render_home(request):
     media_path = '/media/'
     alliances = Alliance.objects.all()
+    sponsors = Sponsor.objects.filter(appear_home=True).order_by('publication_date')[:2]
     date_now = str(timezone.now())
     date_filter = date_now[:19]
     events = Event.objects.filter(date_event__lt=date_filter).order_by('-date_event')[0:3]
@@ -25,6 +27,7 @@ def render_home(request):
     context = {
         'alliances': alliances,
         'title_page': 'Home',
+        'sponsors': sponsors,
         'media_path': media_path,
         'is_active_home': 'active',
         'events': events,
