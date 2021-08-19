@@ -36,7 +36,7 @@
         <div class="col-12 col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-body">
-{#                    <h2>Modificar artículo</h2>#}
+                    {#                    <h2>Modificar artículo</h2>#}
                     <hr>
                     <form name="article_update_form" id="article_update_form" method="post"
                           action="{% url 'article_update' article.pk %}" enctype="multipart/form-data"
@@ -50,18 +50,20 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Descripción*</label>
-                            <textarea class="form-control" name="description" id="description" rows="6"
-                                      placeholder="Descripción del artículo">{{ article.description }}</textarea>
+                            <div class="min-vh-50">
+                                <textarea id="mytextarea" name="description" class="tinymce d-none"></textarea>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Autor*</label>
-                            <select id="author_select" name="author_select" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                            <select id="author_select" name="author_select" class="form-control form-control-lg"
+                                    id="exampleFormControlSelect1">
                                 <option value="0">---------</option>
                                 {% for user in users %}
                                     {% if user.pk == article.author.pk %}
                                         <option value="{{ user.pk }}" selected>{{ user }}</option>
                                     {% else %}
-                                        <option value="{{ user.pk }}" >{{ user }}</option>
+                                        <option value="{{ user.pk }}">{{ user }}</option>
                                     {% endif %}
                                 {% endfor %}
                             </select>
@@ -69,13 +71,14 @@
 
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Categoría*</label>
-                            <select id="category_select" name="category_select" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                            <select id="category_select" name="category_select" class="form-control form-control-lg"
+                                    id="exampleFormControlSelect1">
                                 <option value="0">---------</option>
                                 {% for categorie in categories %}
                                     {% if categorie.pk == article.category.pk %}
                                         <option value="{{ categorie.pk }}" selected>{{ categorie.name }}</option>
                                     {% else %}
-                                        <option value="{{ categorie.pk }}" >{{ categorie.name }}</option>
+                                        <option value="{{ categorie.pk }}">{{ categorie.name }}</option>
                                     {% endif %}
                                 {% endfor %}
                             </select>
@@ -103,7 +106,7 @@
                             <p id="pdf_name" style="display:block;">
                                 <a href="{{ article.pdf.url }}" target="_blank">
                                 </a>
-                                <p value = {{ article.pdf.url  }}></p>
+                            <p value= {{ article.pdf.url }}></p>
                             </p>
                         </div>
 
@@ -235,7 +238,7 @@
                 let file = curFiles[0];
                 if (fileTypesPdf.includes(file.type)) {
                     pdfsOk = true;
-                }else{
+                } else {
                     pdfsOk = false;
                 }
             }
@@ -244,12 +247,12 @@
                 let file = curFiles[0];
                 if (fileTypesImage.includes(file.type)) {
                     imagesOk = true;
-                }else{
+                } else {
                     imagesOk = false;
                 }
             }
 
-            if (name.trim().length != 0 && description.trim().length != 0 && author != 0 && category != 0 && imagesOk && pdfsOk ) {
+            if (name.trim().length != 0 && author != 0 && category != 0 && imagesOk && pdfsOk) {
                 correct = true;
                 p_error.style.display = "none";
             } else {
@@ -263,5 +266,12 @@
             window.location.href = "{% url 'article_list' %}"
         }
 
+    </script>
+    <script src="{% static 'assets_intranet\lib\tinymce\tinymce.js' %}"></script>
+
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
     </script>
 {% endblock %}

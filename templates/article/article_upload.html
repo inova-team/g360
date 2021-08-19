@@ -36,7 +36,7 @@
         <div class="col-12 col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-body">
-{#                    <h2>Nuevo artículo</h2>#}
+                    {#                    <h2>Nuevo artículo</h2>#}
                     <hr>
                     <form name="article_upload_form" id="article_upload_form" method="post"
                           enctype="multipart/form-data" onsubmit="return validateArticleUploadForm();">
@@ -49,12 +49,14 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Descripción*</label>
-                            <textarea class="form-control" name="description" id="description" rows="6"
-                                      placeholder="Descripción del artículo"></textarea>
+                            <div class="min-vh-50">
+                                <textarea id="mytextarea" name="description" class="tinymce d-none"></textarea></div>
+
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Autor*</label>
-                            <select id="author_select" name="author_select" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                            <select id="author_select" name="author_select" class="form-control form-control-lg"
+                                    id="exampleFormControlSelect1">
                                 <option value="0">---------</option>
                                 {% for user in users %}
                                     <option value="{{ user.pk }}">{{ user }}</option>
@@ -63,7 +65,8 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Categoría*</label>
-                            <select id="category_select" name="category_select" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                            <select id="category_select" name="category_select" class="form-control form-control-lg"
+                                    id="exampleFormControlSelect1">
                                 <option value="0">---------</option>
                                 {% for categorie in categories %}
                                     <option value="{{ categorie.pk }}">{{ categorie.name }}</option>
@@ -209,7 +212,7 @@
             let author = document.forms["article_upload_form"]["author_select"].value;
             let category = document.forms["article_upload_form"]["category_select"].value;
 
-            if (name.trim().length != 0 && description.trim().length != 0 && author != 0 && category != 0 && validFileTypePdf() && validFileTypeImage()) {
+            if (name.trim().length != 0 && author != 0 && category != 0 && validFileTypePdf() && validFileTypeImage()) {
                 correct = true;
                 p_error.style.display = "none";
             } else {
@@ -223,5 +226,12 @@
             window.location.href = "{% url 'article_list' %}"
         }
 
+    </script>
+    <script src="{% static 'assets_intranet\lib\tinymce\tinymce.js' %}"></script>
+
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
     </script>
 {% endblock %}

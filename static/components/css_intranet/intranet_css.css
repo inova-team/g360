@@ -65,10 +65,23 @@
     font-weight: bold;
     border-radius: 7px;
 }
+.btn-success:hover {
+    background-color: #f8ac27;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 7px;
+}
 .btn-danger {
     border: 2px solid #ff9f00;
     background-color:  #fff;
     color: #ff9f00;
+    border-radius: 7px;
+    font-weight: bolder;
+}
+.btn-danger:hover {
+    border: 2px solid #ff9f00;
+    background-color:  #ff9f00;
+    color: #fff;
     border-radius: 7px;
     font-weight: bolder;
 }
@@ -81,6 +94,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 .card label{
-    ccolor: #2f6c90;
+    color: #2f6c90;
     font-weight: normal;
+}
+.btn-primary {
+  background-color: #e89410;
+  color: #FFFFFF;
+}
+.btn-primary:hover {
+  background-color: #ff9f00;
+  color: #FFFFFF;
 }
