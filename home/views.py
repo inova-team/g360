@@ -16,7 +16,15 @@ from sponsor.models import Sponsor
 def render_home(request):
     media_path = '/media/'
     alliances = Alliance.objects.all()
-    sponsors = Sponsor.objects.filter(appear_home=True).order_by('publication_date')[:2]
+    sponsors = Sponsor.objects.filter(appear_home=True).order_by('publication_date')[:4]
+    size = len(sponsors)
+    if (size==2):
+        sponsors_left = sponsors[:1]
+        sponsors_right = sponsors[1:2]
+    else:
+        sponsors_left = sponsors[:2]
+        sponsors_right = sponsors[2:4]
+
     date_now = str(timezone.now())
     date_filter = date_now[:19]
     events = Event.objects.filter(date_event__lt=date_filter).order_by('-date_event')[0:3]
@@ -27,7 +35,8 @@ def render_home(request):
     context = {
         'alliances': alliances,
         'title_page': 'Home',
-        'sponsors': sponsors,
+        'sponsors_right': sponsors_right,
+        'sponsors_left': sponsors_left,
         'media_path': media_path,
         'is_active_home': 'active',
         'events': events,
