@@ -113,7 +113,8 @@
                         <div class="form-group mt-3">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" name="appear_home" id="appear_home" type="checkbox">
+                                    <input class="form-check-input" name="appear_home" id="appear_home" type="checkbox"
+                                    {% if sponsor.appear_home %} checked {% endif %}>
                                     Mostrar sponsor en página de inicio
                                     <span class="form-check-sign">
                                     <span class="check"></span>
