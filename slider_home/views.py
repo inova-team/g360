@@ -127,11 +127,11 @@ def list_items_options(request):
     #print(type[str(type_item)])
 
     if type_item == 'Evento':
-        items = Event.objects.all()
+        items = Event.objects.all().order_by('-date_event')
         ser_instace = serializers.serialize('json', items)
 
     elif type_item == 'Articulo':
-        items = Article.objects.all()
+        items = Article.objects.all().order_by('-publication_date')
         ser_instace = serializers.serialize('json', items)
 
     # print(ser_instace)
