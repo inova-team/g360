@@ -19,7 +19,7 @@
                                         <a href="{% url 'event_detail' event.pk %}">{{ event.name }}</a>
                                     </h3>
                                     <p class="card-description">
-                                        {{ event.description |truncatechars:"100" }}
+                                        {{ event.description | safe |truncatechars:"100" }}
                                         <a href="{% url 'event_detail' event.pk %}"> Read More </a>
                                     </p>
                                     <p class="author">
@@ -44,7 +44,7 @@
                                         <a href="{% url 'event_detail' event.pk %}">{{ event.name }}</a>
                                     </h3>
                                     <p class="card-description">
-                                        {{ event.description |truncatechars:"150" }}
+                                        {{ event.description | safe |truncatechars:"150" }}
                                         <a href="{% url 'event_detail' event.pk %}"> Read More </a>
                                     </p>
                                     <p class="author">
