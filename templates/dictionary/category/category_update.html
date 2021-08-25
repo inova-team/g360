@@ -50,6 +50,20 @@
                             <label for="description">Descripción*</label>
                             <textarea type="text" name="description" id="description" class="form-control">{{ category.description }}</textarea>
                         </div>
+
+                        <div class="form-group mt-3">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="show_category_user" id="show_category_user" type="checkbox"
+                                    {% if category.show_user %} checked {% endif %}>
+                                    Mostrar categoría al usuario
+                                    <span class="form-check-sign">
+                                    <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
                         <div>
                             <label class="btn btn-github btn-round" for="image_uploads">Elija una imagen
                                 <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png">

@@ -14,6 +14,7 @@ class Word_Category(models.Model):
     register_author = models.ForeignKey(User,related_name="register_author_wc", null=True, blank=True, on_delete=models.CASCADE)
     update_date = models.DateTimeField(editable=True, null=True)
     update_author = models.ForeignKey(User,related_name="update_author_wc", null=True, blank=True, on_delete=models.CASCADE)
+    show_user = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -37,6 +38,7 @@ class Words(models.Model):
     register_author = models.ForeignKey(User, related_name="register_author_w", null=True, blank=True, on_delete=models.CASCADE)
     update_date = models.DateTimeField(editable=True, null=True)
     update_author = models.ForeignKey(User,related_name="update_author_w", null=True, blank=True, on_delete=models.CASCADE)
+    show_user = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

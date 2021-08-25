@@ -20,6 +20,13 @@ def word_upload(request):
 
         word.word = request.POST.get('word')
         word.definition = request.POST.get('definition')
+
+        show_word_user = request.POST.get('show_word_user')
+        if (show_word_user == 'on'):
+            word.show_user = True
+        else:
+            word.show_user = False
+
         word.save()
         return redirect('word_list_intranet')
 
@@ -40,7 +47,7 @@ def word_delete(request, pk):
 
 def word_list(request, pk):
     category = Word_Category.objects.get(pk=pk)
-    words = Words.objects.filter(category_id=category.pk)
+    words = Words.objects.filter(category_id=category.pk, show_user=True)
     media_path = '/media/'
     context = {
         'words': words,
@@ -77,6 +84,12 @@ def word_update(request, pk):
 
         word.word = request.POST.get('word')
         word.definition = request.POST.get('definition')
+
+        show_word_user = request.POST.get('show_word_user')
+        if (show_word_user == 'on'):
+            word.show_user = True
+        else:
+            word.show_user = False
         word.save()
         return redirect('word_list_intranet')
 
@@ -100,6 +113,14 @@ def category_upload(request):
         category.name = request.POST.get('category_name')
         category.description = request.POST.get('description')
         category.banner = request.FILES.get('image_uploads')
+
+        show_category_user = request.POST.get('show_category_user')
+        if (show_category_user == 'on'):
+           category.show_user = True
+        else:
+            category.show_user = False
+
+
         category.save()
         return redirect('category_list_intranet')
 
@@ -119,7 +140,7 @@ def category_delete(request, pk):
 
 
 def category_list(request):
-    categories = Word_Category.objects.all()
+    categories = Word_Category.objects.filter(show_user=True)
     media_path = '/media/'
     context = {
         'media_path': media_path,
@@ -153,6 +174,13 @@ def category_update(request, pk):
 
         if request.FILES.get('image_uploads'):
             category.banner = request.FILES.get('image_uploads')
+
+        show_category_user = request.POST.get('show_category_user')
+        if (show_category_user == 'on'):
+            category.show_user = True
+        else:
+            category.show_user = False
+
         category.save()
 
         return redirect('category_list_intranet')
