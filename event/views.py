@@ -30,6 +30,10 @@ def event_upload(request):
         event.user_last_update = Staff.objects.get(user_id=str(id_current_user))
         event.banner = request.FILES.get('image_uploads')
         event.link_whatsapp_group = data_from_html['url_wsp_group']
+        if request.POST.get('show_event_user') == 'on':
+            event.show_user = True
+        else:
+            event.show_user = False
         event.save()
         return redirect('event_list')
 
@@ -78,6 +82,11 @@ def event_update(request, pk):
         event.user_last_update = Staff.objects.get(user_id=str(id_current_user))
         event.link_whatsapp_group = data_from_html['url_wsp_group']
 
+        if request.POST.get('show_event_user') == 'on':
+            event.show_user = True
+        else:
+            event.show_user = False
+
         if request.FILES.get('image_uploads'):
             event.banner.delete()
             event.banner = request.FILES.get('image_uploads')
@@ -117,7 +126,7 @@ def event_list(request):
 
 
 def event_repository(request):
-    events = Event.objects.all()
+    events = Event.objects.filter(show_user=True)
     date_now = str(timezone.now())
     #print(date_now[:10] + 'T' + date_now[11:19])
     context = {

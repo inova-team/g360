@@ -20,6 +20,7 @@ class Event(models.Model):
     link_form = models.CharField(max_length=500)
     number_participants = models.IntegerField(default=0)
     link_whatsapp_group = models.CharField(max_length=1000)
+    show_user = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

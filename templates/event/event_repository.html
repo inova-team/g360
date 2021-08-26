@@ -90,7 +90,7 @@
                                                 <a href="{% url 'event_detail' event.pk %}">{{ event.name|truncatechars:"40" }}</a>
                                             </h3>
                                             <p class="card-description">
-                                                {{ event.description|truncatechars:"180" }}
+                                                {{ event.description|safe|truncatechars:"180" }}
                                                 <a href="{% url 'event_detail' event.pk %}"> Read More </a>
                                             </p>
                                             <div class="author">
