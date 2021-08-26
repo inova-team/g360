@@ -1,1 +1,117 @@
-[{"model": "auth.group", "pk": 1, "fields": {"name": "User", "permissions": []}}, {"model": "auth.group", "pk": 2, "fields": {"name": "Member", "permissions": []}}, {"model": "auth.group", "pk": 3, "fields": {"name": "Admin", "permissions": []}}]
+[
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "User",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "Member",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "Admin",
+      "permissions": []
+    }
+  },
+  
+  {
+    "model": "alliance.alliance",
+    "pk": 5,
+    "fields": {
+      "name": "Gesti\u00f3n Deportiva PUCP",
+      "description": "2\u00b0 Programa de Especializaci\u00f3n en Digital Sports Management. Con el respaldo de la Pontificia Universidad Cat\u00f3lica del Per\u00fa.",
+      "author": 1,
+      "publication_date": "2021-08-26T17:09:07.906",
+      "banner": "alliance/banner/Gesti\u00f3n_Deportiva.png",
+      "type": "Deportes",
+      "fb_link": "https://www.facebook.com/gestiondeportivapucp",
+      "instagram_link": " https://www.instagram.com/gestiondeportivapucp/",
+      "twitter_link": "",
+      "website_link": "",
+      "is_active": true,
+      "appear_home": true
+    }
+  },
+  {
+    "model": "alliance.alliance",
+    "pk": 6,
+    "fields": {
+      "name": "AIESEC",
+      "description": "AIESEC es la mayor organizaci\u00f3n joven y para j\u00f3venes del mundo. Estamos en m\u00e1s de 137 pa\u00edses desarrollando liderazgo joven por medio de intercambios.\r\nNuestro prop\u00f3sito es generar paz y potencialidades humanas para el mundo, y sabemos que la mejor manera de hacer eso es por medio de cambios culturales en ambientes desafiadores. O sea: Promovemos intercambios para j\u00f3venes de 18 a 30 a\u00f1os para su desarrollo personal y profesional.\r\n\r\n\u00bfYa imaginaste como ser\u00eda el mundo si las pr\u00f3ximas generaciones de l\u00edderes conocen y respetan otras culturas?",
+      "author": 1,
+      "publication_date": "2021-08-26T17:10:50.739",
+      "banner": "alliance/banner/Aiesec.png",
+      "type": "Social",
+      "fb_link": "https://www.facebook.com/AIESECPeru",
+      "instagram_link": "https://www.instagram.com/aiesecenperu/",
+      "twitter_link": "https://twitter.com/aiesec_peru",
+      "website_link": "https://aiesec.pe/",
+      "is_active": true,
+      "appear_home": true
+    }
+  },
+  {
+    "model": "alliance.alliance",
+    "pk": 7,
+    "fields": {
+      "name": " 180DegreesConsulting Per\u00fa",
+      "description": "180 DC es la consultora universitaria m\u00e1s grande del mundo que ofrece servicios de consultor\u00eda de alta calidad a organizaciones sociales para incrementar su impacto. Para ello, estudiantes talentosos donan su tiempo y experiencia para desarrollar soluciones innovadoras, pr\u00e1cticas y sostenibles para los desaf\u00edos que enfrentan las organizaciones.",
+      "author": 1,
+      "publication_date": "2021-08-26T17:12:51.738",
+      "banner": "alliance/banner/180_Degrees.png",
+      "type": "Social",
+      "fb_link": "https://www.facebook.com/180DegreesConsulting",
+      "instagram_link": "",
+      "twitter_link": "https://twitter.com/180Degrees",
+      "website_link": "https://180dc.org/",
+      "is_active": true,
+      "appear_home": true
+    }
+  },
+  {
+    "model": "sponsor.sponsor",
+    "pk": 10,
+    "fields": {
+      "name": "NETZUN",
+      "description": "Netzun es una plataforma educativa donde los m\u00e1s reconocidos y experimentados profesionales transmiten sus conocimientos a trav\u00e9s de cursos online.",
+      "author": 2,
+      "publication_date": "2021-08-26T14:42:25.752",
+      "banner": "sponsor/banner/netzum_logo.png",
+      "type": "Educaci\u00f3n",
+      "fb_link": "https://www.facebook.com/netzun/",
+      "instagram_link": "https://www.instagram.com/netzun/",
+      "twitter_link": "",
+      "website_link": "https://netzun.com/",
+      "is_active": true,
+      "appear_home": true
+    }
+  },
+  {
+    "model": "sponsor.sponsor",
+    "pk": 11,
+    "fields": {
+      "name": "Coder House",
+      "description": "Coderhouse es una plataforma de educaci\u00f3n que ofrece cursos online en vivo sobre habilidades digitales dictados por expertos de la industria y  con un enfoque 100% pr\u00e1ctico que tiene como misi\u00f3n democratizar la educaci\u00f3n de calidad y accesible para Latinoam\u00e9rica.",
+      "author": 1,
+      "publication_date": "2021-08-26T15:02:35.510",
+      "banner": "sponsor/banner/Logo-negro-y-blanco_2.png",
+      "type": "Educaci\u00f3n",
+      "fb_link": "https://www.facebook.com/Coderhouse/",
+      "instagram_link": "https://www.instagram.com/coderhouse/",
+      "twitter_link": "https://twitter.com/CODERHOUSE",
+      "website_link": "https://www.coderhouse.com.pe/",
+      "is_active": true,
+      "appear_home": true
+    }
+  }
+]
