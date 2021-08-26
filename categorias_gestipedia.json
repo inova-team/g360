@@ -1,0 +1,1 @@
+[{"model": "dictionary.word_category", "pk": 3, "fields": {"name": "Categor\u00eda prueba", "description": "Categor\u00eda de prueba", "banner": "word_category/banner/Logo_png.png", "register_date": "2021-08-26T14:42:01.113", "register_author": 4, "update_date": null, "update_author": null, "show_user": true, "is_active": true}}]
