@@ -101,6 +101,18 @@
                             />
                         </div>
 
+                        <div class="form-group mt-3">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="appear_home" id="appear_home" type="checkbox">
+                                    Mostrar aliado en página de inicio
+                                    <span class="form-check-sign">
+                                    <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
                         <div class="d-flex align-items-center flex-column bd-highlight mb-3">
                             <label class="btn btn-github btn-round" for="image_uploads">Elija una imagen*
                                 <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png">
@@ -108,13 +120,14 @@
                             </label>
                             <img class="rounded" id="banner" name="banner" src="" alt="banner" width="250" height="250"
                                  style="display:none;">
-                            <div class="alert alert-warning mt-2" id="message_error" style="display:none;" >
+                            <div class="alert alert-warning mt-2" id="message_error" style="display:none;">
                                 <span><b> No es un tipo de archivo válido, por favor seleccionar nuevamente. </b></span>
                             </div>
                         </div>
 
                         <div class="formulario__mensaje" id="formulario__mensaje">
-                            <div class="alert alert-primary text-center" id="message_upload_error" style="display:none;" >
+                            <div class="alert alert-primary text-center" id="message_upload_error"
+                                 style="display:none;">
                                 <span><b> Por favor rellenar campos obligatorios del formulario. </b></span>
                             </div>
                         </div>
@@ -212,7 +225,6 @@
         function cancelAllianceUpload() {
             window.location.href = "{% url 'alliance_list' %}"
         }
-
 
 
     </script>

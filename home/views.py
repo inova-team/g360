@@ -15,7 +15,7 @@ from sponsor.models import Sponsor
 
 def render_home(request):
     media_path = '/media/'
-    alliances = Alliance.objects.all()
+    alliances = Alliance.objects.filter(appear_home=True)
     sponsors = Sponsor.objects.filter(appear_home=True).order_by('publication_date')[:4]
     size = len(sponsors)
     if (size==2):

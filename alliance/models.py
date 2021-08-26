@@ -14,6 +14,7 @@ class Alliance(models.Model):
     twitter_link = models.CharField(max_length=1000, null=True, blank=True)
     website_link = models.CharField(max_length=1000, null=True, blank=True)
     is_active = models.BooleanField(default=True)
+    appear_home = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return self.name

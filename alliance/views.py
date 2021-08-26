@@ -62,6 +62,12 @@ def alliance_upload(request):
         alliance.description = request.POST.get('description')
         alliance.banner = request.FILES.get('image_uploads')
         alliance.type = request.POST.get('type')
+        appear_home = request.POST.get('appear_home')
+
+        if(appear_home =='on'):
+            alliance.appear_home = True
+        else:
+            alliance.appear_home = False
 
         if 'fb_link' in request.POST:
             alliance.fb_link = request.POST.get('fb_link')
@@ -101,6 +107,12 @@ def alliance_update(request, pk):
         alliance.instagram_link = request.POST.get('instagram_link')
         alliance.twitter_link = request.POST.get('twitter_link')
         alliance.website_link = request.POST.get('website_link')
+        appear_home = request.POST.get('appear_home')
+
+        if (appear_home == 'on'):
+            alliance.appear_home = True
+        else:
+            alliance.appear_home = False
 
         if request.FILES.get('image_uploads'):
             alliance.banner.delete()
