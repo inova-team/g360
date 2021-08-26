@@ -113,5 +113,123 @@
       "is_active": true,
       "appear_home": true
     }
+  },
+
+  {
+    "model": "category_article.category",
+    "pk": 1,
+    "fields": {
+      "name": "Innovaci\u00f3n",
+      "description": ".",
+      "banner": "category/banner/WhatsApp_Image_2021-08-26_at_1.37.22_PM.jpeg",
+      "responsable": 1,
+      "has_father": false,
+      "category_father": null,
+      "is_active": true
+    }
+  },
+  {
+    "model": "category_article.category",
+    "pk": 2,
+    "fields": {
+      "name": "Emprendimientos",
+      "description": ". ",
+      "banner": "category/banner/WhatsApp_Image_2021-08-26_at_1.37.22_PM_aPz62ol.jpeg",
+      "responsable": 1,
+      "has_father": false,
+      "category_father": null,
+      "is_active": true
+    }
+  },
+  {
+    "model": "category_article.category",
+    "pk": 3,
+    "fields": {
+      "name": "Gesti\u00f3n Log\u00edstica",
+      "description": ".",
+      "banner": "category/banner/WhatsApp_Image_2021-08-26_at_1.37.22_PM_MmvSIyA.jpeg",
+      "responsable": 1,
+      "has_father": false,
+      "category_father": null,
+      "is_active": true
+    }
+  },
+  {
+    "model": "category_article.category",
+    "pk": 4,
+    "fields": {
+      "name": "Gesti\u00f3n Cultural",
+      "description": ".",
+      "banner": "category/banner/WhatsApp_Image_2021-08-26_at_1.37.22_PM_xHoe8dx.jpeg",
+      "responsable": 1,
+      "has_father": false,
+      "category_father": null,
+      "is_active": true
+    }
+  },
+  {
+    "model": "article.article",
+    "pk": 5,
+    "fields": {
+      "name": "De lo tradicional a lo \u00e1gil",
+      "description": "<p><span id=\"docs-internal-guid-5949cb75-7fff-4f43-924a-1863e2590886\"><span style=\"font-size: 11pt; font-family: Arial; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;\">La transformaci&oacute;n del mundo de los negocios impulsa a las organizaciones a pivotear para generar mejoras en sus procesos. Es en este pivoteo que las metodolog&iacute;as tradicionales se transforman en lo que son hoy las metodolog&iacute;as &aacute;giles para la gesti&oacute;n de proyectos. Actualmente, existen diversas metodolog&iacute;as que aplican las organizaciones para convertirse en exitosas. Vamos a conocer algunas de estas en el siguiente art&iacute;culo.</span></span></p>",
+      "author": 1,
+      "category": 1,
+      "publication_date": "2021-08-26T14:47:44.259",
+      "pdf": "article/pdfs/De_lo_tradicional_a_lo_\u00e1gil.pdf",
+      "banner": "article/banner/WhatsApp_Image_2021-08-26_at_1.37.22_PM.jpeg"
+    }
+  },
+  {
+    "model": "article.article",
+    "pk": 6,
+    "fields": {
+      "name": "Transformaci\u00f3n digital y liderazgo \u00e1gil",
+      "description": "<p><span id=\"docs-internal-guid-bdf986fd-7fff-3669-516a-e4ae120c134d\"><span style=\"font-size: 11pt; font-family: Arial; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;\">Es una realidad que nos encontramos viviendo una era digital que ha penetrado a un ritmo acelerado en la sociedad. Es por ello, que ante las nuevas necesidades de los clientes, muchas organizaciones destinan gran parte de sus esfuerzos a la transformaci&oacute;n de sus modelos de negocio Sin embargo, &iquest;realmente se conoce qu&eacute; es la transformaci&oacute;n digital? &iquest;acaso &uacute;nicamente implica la adopci&oacute;n de nuevas tecnolog&iacute;as? Claramente la respuesta abarca aspectos mucho m&aacute;s complejos que requieren un enfoque hol&iacute;stico dentro de las organizaciones, partiendo de la capacidad de liderazgo de la alta direcci&oacute;n. En ese sentido, si se persigue un objetivo transformacional, primero es necesario preguntarse: &iquest;qu&eacute; contempla en liderazgo &aacute;gil?</span></span></p>",
+      "author": 1,
+      "category": 1,
+      "publication_date": "2021-08-26T15:28:11.398",
+      "pdf": "article/pdfs/Transformaci\u00f3n_Digital_y_Liderazgo_\u00c1gil.pdf",
+      "banner": "article/banner/WhatsApp_Image_2021-08-26_at_1.37.22_PM_Bewv5Sr.jpeg"
+    }
+  },
+  {
+    "model": "article.article",
+    "pk": 7,
+    "fields": {
+      "name": "Emprendimiento en pandemia",
+      "description": "<p><span id=\"docs-internal-guid-756fc664-7fff-4798-7c6d-a79a41ae893d\"><span style=\"font-size: 11pt; font-family: Arial; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;\">Si bien es cierto la pandemia originada por la COVID-19 ha sido sin&oacute;nimo de p&eacute;rdidas y perjuicios para la sociedad, tambi&eacute;n se ha convertido en un gran incentivo para los ciudadanos. Mientras que algunos han optado por iniciar emprendimientos con miras a mejorar la econom&iacute;a familiar, aquellos que ya pose&iacute;an uno han tenido que adaptarse al nuevo entorno sumergi&eacute;ndose en el mundo digital a trav&eacute;s de la adopci&oacute;n de nuevos canales y herramientas. En ambos casos, se evidencia la persecuci&oacute;n de un objetivo com&uacute;n: reinventarse.</span></span></p>",
+      "author": 1,
+      "category": 2,
+      "publication_date": "2021-08-26T15:28:55.571",
+      "pdf": "article/pdfs/Emprendiendo_en_pandemia_.pdf",
+      "banner": "article/banner/WhatsApp_Image_2021-08-26_at_1.37.22_PM_niR2mIs.jpeg"
+    }
+  },
+  {
+    "model": "article.article",
+    "pk": 8,
+    "fields": {
+      "name": "La gesti\u00f3n de una log\u00edstica contraproducente",
+      "description": "<p><span id=\"docs-internal-guid-a4c8729e-7fff-fc81-f300-83db044783ea\"><span style=\"font-size: 11pt; font-family: Arial; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;\">Inevitablemente, el rol de la log&iacute;stica en la lucha contra la COVID-19 ha recibido un especial foco de atenci&oacute;n por parte de&nbsp; las autoridades y de la ciudadan&iacute;a. Por un lado, los expertos se han visto en el dilema de garantizar las condiciones adecuadas para el correcto traslado y distribuci&oacute;n de las vacunas. Si bien es cierto, este proceso se ha agilizado en algunas regiones, el pa&iacute;s a&uacute;n enfrenta dificultades en el acceso a otro recurso vital: el ox&iacute;geno m&eacute;dico. Al respecto, se ha evidenciado una serie de deficiencias partiendo de la falta de preparaci&oacute;n del Gobierno para administrar las plantas de ox&iacute;geno medicinal. Ante ello, surge el siguiente cuestionamiento: &iquest;qu&eacute; impedimentos existen y qu&eacute; acciones se requieren para garantizar el derecho a la salud en el Per&uacute;?</span></span></p>",
+      "author": 1,
+      "category": 3,
+      "publication_date": "2021-08-26T15:29:30.004",
+      "pdf": "article/pdfs/La_gesti\u00f3n_de_una_log\u00edstica_contraproducente.pdf",
+      "banner": "article/banner/WhatsApp_Image_2021-08-26_at_1.37.22_PM_O4wWNAf.jpeg"
+    }
+  },
+  {
+    "model": "article.article",
+    "pk": 9,
+    "fields": {
+      "name": "El arte de hacer Gesti\u00f3n",
+      "description": "<p><span id=\"docs-internal-guid-b6bd025d-7fff-5a9c-0813-bc5a761f82d3\"><span style=\"font-size: 11pt; font-family: Arial; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;\">Tenemos que tener en cuenta que, actualmente, se considera que la cultura y la gesti&oacute;n son dos &aacute;mbitos distintos que nunca podr&iacute;an juntarse. Sin embargo, &iquest;Es eso cierto? Sabemos que la gesti&oacute;n trata de abordar m&aacute;s temas econ&oacute;micos y la cultura se concentra en el intercambio de valor simb&oacute;lico, &iquest;Podr&iacute;an estos colaborar? La respuesta a esta pregunta tiene que considerar dos factores importantes. El primer factor es que existe la percepci&oacute;n negativa de que la gesti&oacute;n cultural podr&iacute;a enfocarse m&aacute;s a sostenibilidad econ&oacute;mica. El segundo factor es que existen pocos gestores que se especializan en el fomento de la cultura. Ante estos dos retos, desde la gesti&oacute;n podr&iacute;amos promover m&aacute;s los estudios en esta rama que es afectada por la pandemia.</span></span></p>",
+      "author": 1,
+      "category": 4,
+      "publication_date": "2021-08-26T15:29:58.483",
+      "pdf": "article/pdfs/El_arte_de_hacer_Gesti\u00f3n_.pdf",
+      "banner": "article/banner/WhatsApp_Image_2021-08-26_at_1.37.22_PM_cndlz1R.jpeg"
+    }
   }
 ]
