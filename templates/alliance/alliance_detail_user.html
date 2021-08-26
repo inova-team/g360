@@ -3,6 +3,9 @@
 
 {% block extrastyles %}
     <style>
+        ul {
+            list-style-type: none;
+        }
     </style>
 {% endblock %}
 
@@ -10,7 +13,7 @@
     <div class="cd-section" id="headers">
         <div class="page-header page-header-small">
             <div class="page-header-image" data-parallax="true"
-                 style="background-image:url({{ alliance.banner.url }});">
+                 style="background-image:url({{ alliance.banner.url }}); background-size: 100% 100%;">
             </div>
             <div class="content-center">
                 <div class="row">
@@ -51,7 +54,7 @@
                                     {% if alliance.twitter_link %}
                                         <li>
                                             <a href="{{ alliance.twitter_link }}" target="_blank"
-                                               class="btn btn-icon btn-neutral btn-twitter btn-lg list-group-item m-0">
+                                               class="btn btn-icon btn-neutral btn-link list-group-item m-0">
                                                 <i class="fab fa-twitter"></i>
                                             </a>
                                         </li>
@@ -59,7 +62,7 @@
                                     {% if alliance.fb_link %}
                                         <li>
                                             <a href="{{ alliance.fb_link }}" target="_blank"
-                                               class="btn btn-icon btn-neutral btn-facebook btn-lg list-group-item m-0">
+                                               class="btn btn-icon btn-neutral btn-link list-group-item m-0">
                                                 <i class="fab fa-facebook-square"></i>
                                             </a>
                                         </li>
@@ -67,7 +70,7 @@
                                     {% if alliance.instagram_link %}
                                         <li>
                                             <a href="{{ alliance.instagram_link }}" target="_blank"
-                                               class="btn btn-icon btn-neutral btn-dribbble btn-lg list-group-item m-0">
+                                               class="btn btn-icon btn-neutral btn-link list-group-item m-0">
                                                 <i class="fab fa-instagram"></i>
                                             </a>
                                         </li>
