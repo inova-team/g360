@@ -98,9 +98,40 @@ style attribute {
     color: #c0cfe2;
 }
 
-.card-title{
-    color: #091627 !important;
+.card-body {
+    background-color: #091627;
 }
-.card-description{
+
+.card-title {
     color: #ffffff !important;
+}
+
+.card-description {
+    color: #ffffff !important;
+}
+
+.modal-content {
+    background-color: #091627;
+}
+
+.btn-primary.btn-link {
+    color: #ffffff;
+}
+
+.table .thead-light th {
+    color: #fff;
+    background-color: #091627;
+    border-color: #fff;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(92,197,197,0.1);
+}
+
+option{
+    color: #fff !important;
+}
+.form-control {
+    background-color: #091627 !important;
+    color: #fff !important;
 }
